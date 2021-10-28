@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<?php
+            session_start();
+            if(!isset($_SESSION["theme"]))
+            {
+                $_SESSION["theme"] = "light";
+            }
+        ?>
+        <?php echo $_SESSION['theme']; ?>-->
+        <meta charset="utf-8">
+        <title>Главная</title>
+        <link rel="stylesheet" href="all_styles/main_page_dark.css" id="theme-link">         <!--Контент внутри main-->
+        <link rel="stylesheet" href="all_styles/main_page_main_theme.css">
+        <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">               <!--Фавиконка-->
+
+        <!---Иконки для менюшки-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Google Fonts Viaoda Libre для заголовков-->
+        <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+        <!--Google Fonts Roboto для основного текста-->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="all_scripts/main_page_script_dark.js"></script>
+    </head>
+    <body>
+        <header id="pageHeader">
+            <a name="home_anchor"></a>
+            <p class="name_style">SideStory</p>
+            <div class="stylish">
+                <div class="img_profile">
+                    <img src="../img/profile.jpg" width="70px">
+                </div>
+                <div class="span_block">
+                    <a class="span_profile" href="">USERNAME</a>
+                </div>
+            </div>
+        </header>
+
+        <div id="menuBar">
+            <div class="icon-bar">
+                <a href="#home_anchor" class="active" onclick="dropMenu()" id="menuIcon"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>  
+
+
+        <div id="pageMenu">
+            <div class="icon-bar">
+                <a class="active" href="#home_anchor" id="homeIcon">
+                    <i class="fa fa-home" data-tooltip="Домой"></i>
+                </a>
+                <a href="#home_anchor" onclick="openNav()" id="searchIcon">
+                    <i class="fa fa-search" data-tooltip="Поиск"></i>
+                </a>
+                <a href="../../instruction.html">
+                    <i class="fa fa-question" data-tooltip="Помощь"></i>
+                </a>
+                <a href="#" onclick="ChangeTheme()">
+                    <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                </a>
+            </div>
+        </div>
+
+
+        <div id="mySidenav" class="sidenav">
+            <p class="search_p">Поиск</p>
+            <form>
+                <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
+                <button type="submit" title="submit"></button>
+            </form>
+            <ul id="menuSearch">
+                <li><a href="pages with info about stories (ver 1.1) dark/Founder_info (ver 1.1).html">Магистр дьявольского культа</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/Minister_info (ver 1.1).html">Премьер-министр под прекрытием</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/System_info (ver 1.1).html">Система "Спаси-себя-сам" для главного злодея</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/Adventure_to_immortal_ info (ver 1.1).html">Путешествие к бессмертию</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/Lanya_info (ver 1.1).html">Список архива Ланъя</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/Wolf_info (ver 1.1).html" target="_self">Убить волка</a></li>
+                <li><a href="pages with info about stories (ver 1.1) dark/Erha_info (ver 1.2).html" target="_self">Хаски и его учитель-кот</a></li>
+            </ul>
+        </div>
+
+
+
+        <div id="main">
+            <div class="block_style">
+                <a href="info_pages/html-исходинки/Erha_info_ver_1.2.html" target="_self">
+                    <img src="../img/erha.jpg" class="imgBlock">
+                </a>
+                <a href="pages with info about stories (ver 1.1) dark/Erha_info (ver 1.2).html" class="headerBlock" target="_self"><b>Хаски и его учитель-кот</b></a>
+                <p class="infoBlock">
+                    Мо Жань чувствовал, что выбрать Чу Ваньнина учителем было большой ошибкой.<br>
+                    По правде говоря, Уважаемый Учитель слишком уж похож на кота, а сам он – на постоянно крутящегося под ногами и виляющего хвостом глупого щенка. <br>
+                    Псы и коты относятся к разным видам и не могут быть вместе, и глупый пес изначально вовсе не планировал тянуть к коту свои мохнатые лапы.<br>
+                    Он нутром чуял, что раз уж родился собакой, то должен выбрать себе в пару другую собаку. Вот взять к примеру его старшего брата-наставника, похожего на прелестного шпица, вместе они составили бы идеальную пару. <br>
+                </p>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/Erha_info_ver_1.2.html' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/Wolf_info (ver 1.1).html" target="_self">
+                    <img src="../img/killing_the_wolf.jpg" class="imgBlock">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/Wolf_info (ver 1.1).html" target="_self"><b>Убить волка</b></a>
+                <p class="infoBlock">
+                    В эпоху Великой Лян жизнь людей стала комфортнее благодаря паровым машинам, работающим на топливе под названием «цзылюцзинь». Чан Гэн, который провел всё детство в небольшом городке, имел не самые лучшие отношения с матерью, а отчим наведывался домой всего несколько раз в год. Его единственными друзьями были двое маленьких детей, учитель и его ифу — приемный отец. Но однажды его жизнь перевернулась с ног на голову. После вторжения варварских племен Чан Гэн узнал, что вся его жизнь, личность, мать, учитель и даже его любимый ифу — сплошная ложь. 
+                </p>
+                <br><br>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/System_info (ver 1.1).html" target="_self">
+                    <img src="../img/scumbag villian's self-saving system.jpg" class="imgBlock">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/System_info (ver 1.1).html" target="_self"><b>Система "Спаси-себя-сам" для главного злодея</b></a>
+                <p class="infoBlock">
+                    «С каких пор меня тошнит от гаремных романов?» <br>
+                    Литературный критик Шэнь Юань перерождается в одного из героев ненавистного романа - гнусного злодея Шэнь Цинцю.
+                    Которому, само собой, суждено быть казненным главным героем с особой жестокостью.<br>
+                    «Не то чтобы я мечтал броситься на шею главному герою при чтении, но какого черта он ведет себя подобным образом? И с какой радости все романтические линии замыкаются на меня?»<br>
+                    <a href="pages with info about stories (ver 1.1)/System_info (ver 1.1).html">Подробнее</a>
+                </p>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+    
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/Minister_info (ver 1.1).html" target="_self">
+                    <img src="../img/prime-minister-in-disguise.jpg" class="imgBlock" width="158px">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/Minister_info (ver 1.1).html" target="_self"><b>Премьер-министр под прекрытием</b></a>
+                <p class="infoBlock">
+                    Ради своей младшей сестры талантливый мужчина, переодевшись в женщину, проник во дворец, чтобы добиться благосклонности императора. Что он сделает, попав в его жестокий и опасный гарем? И какую историю он придумает для Императора и Премьер-Министра? Он не только должен бороться за свои права, но также влюбить в себя императора ради сестры.  У него получится? И что же случится после того, как Император узнает правду?
+                </p>
+                <br><br>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+
+
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/Lanya_info (ver 1.1).html" target="_self">
+                    <img src="../img/langya_bang.jpg" class="imgBlock" width="177px">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/Lanya_info (ver 1.1).html" target="_self"><b>Список архива Ланъя</b></a>
+                <p class="infoBlock">
+                    История разворачивается вокруг заговора против старшего сына императора и семьи Линь, глава которой командует армией Великой Лян. Они обвинены в измене и приговорены к смерти. Линь Шу, девятнадцатилетний командующий одного из отрядов, выживает и скрывается в Цзянху, мире бойцов. Приняв личность ученого Мэй Чансу, он основывает союз Цзянцзо и устраивает свои дела вдали от двора, готовясь отомстить. Сильно подорванное здоровье заставляет его отказаться от физических методов и заняться деятельностью стратега. Двенадцать лет спустя он возвращается в столицу под вымышленным именем, чтобы вмешаться в борьбу сыновей императора за престол.
+                    <a href="pages with info about stories (ver 1.1) dark/Lanya_info (ver 1.1).html">Подробнее</a> 
+                </p>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/Founder_info (ver 1.1).html" target="_self">
+                    <img src="../img/the_founder_of_diabolic.jpg" class="imgBlock" width="164px">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/Founder_info (ver 1.1).html" target="_self"><b>Магистр дьявольского культа</b></a>
+                <p class="infoBlock">
+                    Когда-то давно Основатель Пути Тьмы Вэй Уcянь странствовал по свету, творя невообразимые бесчинства и хаос, за что миллионы людей ненавидели его. В конце концов он был предан своим шиди и убит союзом кланов, объединившихся, чтобы сокрушить его. Вэй Усянь переродился в теле чудака, от которого отказался родной клан. Позже его против воли забрал к себе Лань Ванцзи — его давний знакомый.<br>
+                </p>
+                <br><br><br>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../img/age.jpg', 'info_pages/html-исходинки/' , '#home_anchor')">ИГРАТЬ</a>
+                </div>
+            </div>
+
+            <div class="block_style">
+                <a href="pages with info about stories (ver 1.1) dark/Adventure_to_immortal_ info (ver 1.1).html" target="_self">
+                    <img src="../img/puteshestvie-k-bessmertiyu.jpg" class="imgBlock" width="170px">
+                </a>
+                <a class="headerBlock" href="pages with info about stories (ver 1.1) dark/Adventure_to_immortal_ info (ver 1.1).html" target="_self"><b>Путешествие к бессмертию</b></a>
+                <p class="infoBlock">
+                    Бедный и обычный мальчик из деревни присоединяется к небольшой секте в Цзян Ху и случайно становится Неофициальным Учеником. Как Хань Ли, простолюдин по происхождению, создаст для себя точку опоры в его секте? Как он, со своими посредственными способностями, сможет успешно пройти путь культивации и стать бессмертным? Эта история об обычном смертном, который, несмотря на все трудности, сразится с демонами и древними небожителями для того, чтобы найти свой собственный путь к бессмертию.
+                </p>
+                <br><br>
+                <div class="playButton">
+                    <a href="#home_anchor" class="source" target="_self">ИГРАТЬ</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="footer">
+            <div class="footer_info_container">
+                <p class="footer_name_style">
+                    SideStory
+                </p>
+                <div class="mini_map">
+                    <p><a href="#home_anchor">Главная</a></p>
+                    <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
+                    <p><a href="../../instruction.html">Помощь в игре</a></p>
+                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
+                </div>
+            </div>
+            <div class="donate">
+                Админу на печеньки: 4276 3801 7858 6025
+            </div>
+        </div>
+    </body>
+</html>

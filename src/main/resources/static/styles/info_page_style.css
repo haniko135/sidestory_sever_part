@@ -1,0 +1,49 @@
+@media (min-width:320px) and (max-width: 749px){
+}
+
+@media (min-width:750px) and (max-width: 1023px){
+}
+
+@media (min-width: 1024px) and (max-width: 2560px){
+    .h3_info{                                               /*заголовок*/   
+        font-family: 'Viaoda Libre', cursive;
+        font-size: 75px; 
+        line-height: 1.0;
+        margin-bottom: 2%;
+        color: #c5bba6;
+        text-align: center;
+    }
+    .p_info{                                               /*описание*/
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        margin-top: 2%;
+        color: #beb59f;
+        padding-left: 2%;
+    }
+    .button_style{                                          /*кнопка*/
+        border: 2px solid #7e6d36;
+        text-align: center;
+    }
+    .source{                                                /*ссылка кнопки*/
+        font-family: 'Roboto', sans-serif;
+        font-size: 45px;
+        color: #beb59f;
+        text-decoration: none;
+    }
+    .front{                                              /*фотка*/
+        float: left;
+        margin-right: 2%;
+        margin-left: 2%;
+    }
+    .attention{
+        font-family: 'Viaoda Libre', cursive;
+        font-size: 40px;
+        margin-top: 2%;
+        color: #beb59f;
+    }
+}
+
+.block_style_info{                                       /*сам блок*/
+    padding-top: 3%;
+    padding-bottom: 10%;
+}

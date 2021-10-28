@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    container_name: sidestory_db
+    image: mysql:latest
+    ports:
+      - "5555:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: QWERTY
+      MYSQL_DATABASE: sidestory_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: QWERTY
+    volumes:
+      - "./mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"

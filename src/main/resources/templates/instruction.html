@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Инструкция к игре</title>
+        <link rel="stylesheet" href="page 2/style_for chapters_common.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .left_block{
+                width: 66%; 
+                position: absolute;
+                margin-left: 5px;
+                padding-left: 5px;
+                padding-right: 3px;
+                z-index: 1;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .main_block{
+                width: 66%; 
+                margin-left: 17%;
+                margin-right: 17%; 
+                padding-left: 5px;
+                padding-right: 5px;
+                position: absolute;
+                z-index: 0;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .right_block{
+                width: 66%; 
+                margin-left: 33%; 
+                margin-right: 5px; 
+                padding-left: 5px;
+                padding-right: 5px;
+                position: absolute;
+                float: left;
+                z-index: 2;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .hidden_text_txt{
+                font-family: 'Roboto Condensed', sans-serif;
+                visibility: hidden;
+            }
+            .hidden_text_ch{
+                font-family: 'El Messiri', sans-serif;
+                visibility: hidden;
+            }
+            .main_text_right{
+                font-family: 'El Messiri', sans-serif;
+                color: #f7f3e5;
+                text-align: right;
+            }
+            .main_text_left_characther{
+                font-family: 'El Messiri', sans-serif;
+                color: #f7f3e5;
+                text-align: left;
+            }
+            .main_text_center{
+                font-family: 'Roboto Condensed', sans-serif;
+                color: #f7f3e5;
+                text-align: justify;
+            }
+            a{
+                text-decoration: none;
+                color: #1b6974;
+                font-weight: 600;
+            }
+            a:hover{
+                color: skyblue;
+            }
+            @media only screen and (min-width: 320px) and (max-width: 424px){
+                p{
+                    margin-top: 105px;
+                    margin-bottom: 105px;
+                    font-size: 40px;
+                }
+            }
+            @media only screen and (min-width: 425px) and (max-width: 1023px){
+                p{
+                    margin-top: 95px;
+                    margin-bottom: 95px;
+                    font-size: 30px;
+                }
+            }
+            @media only screen and (min-width: 1024px) and (max-width: 1440px) {
+                p{
+                    margin-top: 125px;
+                    margin-bottom: 125px;
+                    font-size: 35px;
+                }
+                a{
+                    font-size: 35px;
+                }
+            }
+            @media only screen and (min-width: 1441px) and (max-width: 2560px){
+                p{
+                    margin-top: 105px;
+                    margin-bottom: 105px;
+                    font-size: 50px;
+                }
+                a{
+                    font-size: 5    5px;
+                }
+            }
+            body{
+                background-image: url("page 2/Система своё/img/комната.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="left_block">
+                <p class="hidden_text_txt">
+                    Добро пожаловать на SideStory.<br><br>
+                    Предлагаем вашему вниманию инструкцию по пользованию игровыми возможностями интерактивных новелл.
+                </p>
+                <p class="hidden_text_ch">
+                    - Здесь располагаются высказывания героя, которым играете вы.
+                </p>
+                <p class="main_text_left_characther">
+                    - А здесь реплики других персонажей...
+                </p>
+                <p class="hidden_text_txt">
+                    Тут вы можете видеть описание действий персонажей и внешнюю обстановку.
+                </p>
+                <p class="hidden_text_txt">
+                    Интерактивные новеллы поддерживаются на разных устройствах.<br><br>
+                    Вы можете читать как с телефона, так и с планшета или компьютера. Попробуйте...
+                </p>
+                <p class="hidden_text_ch">
+                    <span><a href="#">В таких ссылках обычно находяться выборы вашего персонажа</a></span>
+                    <span><a href="#">Их может быть несколько, и только от вашего выбора зависит сюжет новеллы</a></span>
+                </p>
+                <p class="hidden_text_txt">
+                    Итак, добро пожаловать в мир SideStory...
+                    <span><a>Войти</a></span>
+                </p>
+            </div>
+            <div class="main_block">
+                <p class="main_text_center">
+                    Добро пожаловать на SideStory.<br><br>
+                    Предлагаем вашему вниманию инструкцию по пользованию игровыми возможностями интерактивных новелл.
+                </p>
+                <p class="hidden_text_ch">
+                    - Здесь располагаются высказывания героя, которым играете вы.
+                </p>
+                <p class="hidden_text_ch">
+                    - А здесь реплики других персонажей...
+                </p>
+                <p class="main_text_center">
+                    Тут вы можете видеть описание действий персонажей и внешнюю обстановку.
+                </p>
+                <p class="main_text_center">
+                    Интерактивные новеллы поддерживаются на разных устройствах.<br><br>
+                    Вы можете читать как с телефона, так и с планшета или компьютера. Попробуйте...
+                </p>
+                <p class="hidden_text_ch">
+                    <span><a href="#">В таких ссылках обычно находяться выборы вашего персонажа</a></span>
+                    <span><a href="#">Их может быть несколько, и только от вашего выбора зависит сюжет новеллы</a></span>
+                </p>
+                <p class="main_text_center">
+                    Итак, добро пожаловать в мир SideStory...<br><br><br><br>
+                    <span><a href="page 1/ver 1.1/page_1 (ver.1.2) light.html">Войти</a></span>
+                </p>
+            </div>
+            <div class="right_block">
+                <p class="hidden_text_txt">
+                    Добро пожаловать на SideStory.<br><br>
+                    Предлагаем вашему вниманию инструкцию по пользованию игровыми возможностями интерактивных новелл.
+                </p>
+                <p class="main_text_right">
+                    - Здесь располагаются высказывания героя, которым играете вы.
+                </p>
+                <p class="hidden_text_ch">
+                    - А здесь реплики других персонажей...
+                </p>
+                <p class="hidden_text_txt">
+                    Тут вы можете видеть описание действий персонажей и внешнюю обстановку.
+                </p>
+                <p class="hidden_text_txt">
+                    Интерактивные новеллы поддерживаются на разных устройствах.<br><br>
+                    Вы можете читать как с телефона, так и с планшета или компьютера. Попробуйте...
+                </p>
+                <p class="main_text_right">
+                    <span><a href="#">В таких ссылках обычно находяться выборы вашего персонажа</a></span><br><br>
+                    <span><a href="#">Их может быть несколько, и только от вашего выбора зависит сюжет новеллы</a></span>
+                </p>
+                <p class="hidden_text_txt">
+                    Итак, добро пожаловать в мир SideStory...<br><br><br>
+                    <span><a>Войти</a></span>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

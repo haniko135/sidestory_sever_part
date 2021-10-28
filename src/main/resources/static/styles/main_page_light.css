@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@media(min-width: 320px) and (max-width: 749px){
+
+}
+@media (min-width:750px) and (max-width: 1023px){
+
+}
+@media (min-width: 1024px) and (max-width: 2560px){
+    #menuBar{
+        visibility: hidden;
+    }
+    #pageMenu{                                      /*менюшка*/
+        border-right: 5px solid rgb(75, 59, 28);
+    }
+}
+body{    
+    background-color: #dfdfdf;                                           /*контейнер*/
+}
+#pageHeader{                                    /*хедер*/
+    border-bottom: 5px solid rgb(75, 59, 28);
+    background: radial-gradient(100% 80% ,#978568, #6b5a3f);
+}
+#footer{
+    border-top: 5px solid rgb(75, 59, 28);
+    background: radial-gradient(100% 80%, #978568, #6b5a3f);
+}
+.block_style{                                       /*сам блок*/
+    border-bottom: 2px solid rgb(75, 59, 28);
+}
+.headerBlock{
+    color: #524833;
+}
+.infoBlock{
+    color: #241d0b;
+}
+.infoBlock a{
+    color: #4d4431;
+}
+.infoBlock a:hover{
+    color: #887d62;
+}
+.block_style:hover{
+    background-color: #e9e9e9ee;
+}
+.headerBlock:hover{
+    color: #887d62;
+}
+.playButton{                                          /*кнопка*/
+    border: 2px solid #6b6b6b;
+}
+.playButton:hover{                                          /*кнопка*/
+    background: radial-gradient(#dbc7a7, #83683d);
+    border: 2px solid #412a14;
+}
+.source{
+    color: #383429;
+}
+.name_style{
+    color: #e9e9e9;
+}
+.footer_name_style{
+    color: #e9e9e9;
+}
+.mini_map p > a{
+    color: #161207;
+}
+.donate{
+    color:  #161207;
+}
+.stylish{
+    border-left: 3px solid rgb(75, 59, 28);
+}
+.stylish:hover{
+    background-color: #f5dcc057;
+}
+.span_profile{
+    color: #fcfcfc;
+}
+.icon-bar a {
+    color: #f3f1f1;
+}
+.icon-bar a:hover {
+    background-color: rgb(233, 233, 233); 
+}
+.active {
+    background-color: #857154;
+}
+#menuSearch li a{
+    color: #d1d1d1;
+}
+.search_p{
+    color: #d1d1d1;
+}
+input {
+    border: 2px solid #cfcfcf;
+    background: #F9F0DA;
+    color: #9E9C9C;
+}
+button{
+    background: #d1d1d1;
+}
+button:before {
+    color: #fffaec;
+}
+#menuSearch li a:hover{
+    background-color: #ffffff;
+}
+.block-with-info{
+    background: rgb(143, 120, 103);
+    border: 3px solid #2b2211;
+    color: #ebe4d5;
+}
+.close {                                                /*кнопки в окне*/
+    border: 1px solid #2b2211;
+    color: #1b1209;
+    background: #ebe4d5;
+}
