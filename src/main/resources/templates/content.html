@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Оглавление</title>
+        <link rel="stylesheet" href="styles/main_page_dark.css">         <!--Контент внутри main-->
+        <link rel="stylesheet" href="styles/main_page_main_theme.css">
+        <link rel="stylesheet" href="styles/oglavlenie.css">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+        <!---Иконки для менюшки-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Google Fonts Viaoda Libre для заголовков-->
+        <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+        <!--Google Fonts Roboto для основного текста-->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../page 1/content/oglavlenie_script_dark.js"></script>
+    </head>
+    <body class="background">
+
+        <header id="pageHeader">
+            <a name="home_anchor"></a>
+            <p class="name_style">SideStory</p>
+            <div class="stylish">
+                <div class="img_profile">
+                    <img src="img/profile.jpg" width="70px">
+                </div>
+                <div class="span_block">
+                    <a class="span_profile" href="">USERNAME</a>
+                </div>
+            </div>
+        </header>
+
+        <div id="menuBar">
+            <div class="icon-bar">
+                <a href="#home_anchor" class="active" onclick="dropMenu()" id="menuIcon"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>  
+
+        <div id="pageMenu">
+                <div class="icon-bar">
+                    <a href="/main" id="homeIcon"><i
+                            class="fa fa-home"></i></a>
+                    <a href="#home_anchor" onclick="openNav()" id="searchIcon"><i class="fa fa-search"></i></a>
+                    <a href="/instruction"><i class="fa fa-question"></i></a>
+                    <a href="Оглавление волка light.html"><i class="fa fa-adjust"></i></a>
+                </div>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <p class="search_p">Поиск</p>
+            <form>
+                <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind"
+                    onkeyup="searchOnPage()">
+                <button type="submit" title="submit"></button>
+            </form>
+            <ul id="menuSearch" th:each="novel:${novelsAll}">
+                <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
+            </ul>
+        </div>
+
+        <div id="main">
+            <div>
+                <div class="oglavlenie_block">
+                    <span class="oglavlenie">ОГЛАВЛЕНИЕ</span>
+                </div>
+                <div class="block_chapter">
+                    <p class="for_chapters"><a href="Чан Ген/1 глава/ch_1_1.html">Глава 1. Граница</a></p>
+                </div>
+                <div class="block_chapter">
+                    <p class="for_chapters"><a href="#ch_2d">Глава 2. Ифу</a></p>
+                </div>
+                <div class="block_chapter">
+                    <p class="for_chapters"><a href="#ch_3d">Глава 3. Прославленный генерал</a></p>
+                </div>
+                <div class="block_chapter">
+                    <p class="for_chapters"><a href="#ch_4d">Глава 4. Гигантский змей</a></p>
+                </div>
+        
+        
+                <div id="ch_2d">
+                    <div id="okno_wolf_d">
+                        За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>
+                        <img src="img/Чан Ген.jpg" alt="Чан Ген">
+                        <img src="img/Гу Юнь.jpg" alt="Шэнь Шилю">
+                        <div>
+                            <div><a href="Чан Ген/2 глава/ch_2_1.html"
+                                    class="close">Чан Ген</a></div>
+                            <div><a href="#" class="close">Шэнь Шилю</a></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div id="ch_3d">
+                    <div id="okno_wolf_d">
+                        За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>
+                        <img src="img/Чан Ген.jpg" alt="Чан Ген">
+                        <img src="img/Гу Юнь.jpg" alt="Шэнь Шилю">
+                        <div>
+                            <div><a href="Чан Ген/3 глава/ch_3_1.html"
+                                    class="close">Чан Ген</a></div>
+                            <div><a href="#" class="close">Шэнь Шилю</a></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div id="ch_4d">
+                    <div id="okno_wolf_d">
+                        За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>
+                        <img src="img/Чан Ген.jpg" alt="Чан Ген">
+                        <img src="img/Гу Юнь.jpg" alt="Шэнь Шилю">
+                        <div>
+                            <div><a href="Чан Ген/4 глава/ch_4_1.html"
+                                    class="close">Чан Ген</a></div>
+                            <div><a href="#" class="close">Шэнь Шилю</a></div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+        
+            </div>
+        </div>
+
+    </body>
+</html> 

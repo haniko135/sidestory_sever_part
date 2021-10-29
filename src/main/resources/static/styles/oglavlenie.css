@@ -1,0 +1,310 @@
+@media (min-width:320px) and (max-width: 749px){
+    #okno_wolf_l {                                             /*сами окна*/
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #2b2211;
+        border-radius: 10px;
+        color: #ebe4d5;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(143, 120, 103);
+    }
+    #okno_wolf_l > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 40px;
+        text-decoration: none;
+        color: inherit;
+    }
+    #okno_wolf_d {                                             /*сами окна*/
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #000000;
+        border-radius: 10px;
+        color: #d8d8d8;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(17, 17, 17);
+    }
+    #okno_wolf_d > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 40px;
+        text-decoration: none;
+        color: inherit;
+    }
+    img[src="img/Чан Ген.jpg"]{
+        height: 45%; 
+        width: 45%;
+        float: left; 
+        padding-left: 1%; 
+        padding-right: 3%;
+    }
+    img[src="img/Гу Юнь.jpg"]{
+        height: 45%; 
+        width: 45%;
+        padding-right: 3%;
+    }
+    #okno_wolf_l > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    #okno_wolf_d > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .close {                                                /*кнопки в окне*/
+        display: inline-block;
+        border: 1px solid #2b2211;
+        color: #1b1209;
+        padding: 0 12px;    
+        margin: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        background: #ebe4d5;
+        cursor:pointer;
+    }
+}
+@media (min-width:750px) and (max-width: 1023px){
+    #okno_wolf_l {                                             /*сами окна*/
+        width: 600px;
+        height: 500px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #2b2211;
+        border-radius: 10px;
+        color: #ebe4d5;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 35px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(143, 120, 103);
+    }
+    #okno_wolf_l > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 45px;
+        text-decoration: none;
+        color: inherit;
+    }
+    #okno_wolf_d {                                             /*сами окна*/
+        width: 600px;
+        height: 400px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #000000;
+        border-radius: 10px;
+        color: #d8d8d8;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 35px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(17, 17, 17);
+    } 
+    #okno_wolf_d > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 45px;
+        text-decoration: none;
+        color: inherit;
+    }
+    img[src="img/Чан Ген.jpg"]{
+        height: 300px; 
+        width: 260px;
+        float: left; 
+        padding-left: 5%; 
+        padding-right: 3%;
+    }
+    img[src="img/Гу Юнь.jpg"]{
+        height: 300px; 
+        width: 260px;
+        float: left; 
+        padding-right: 5%;
+    }
+    #okno_wolf_l > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    #okno_wolf_d > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .close {                                                /*кнопки в окне*/
+        display: inline-block;
+        border: 1px solid #2b2211;
+        color: #1b1209;
+        padding: 0 12px;    
+        margin: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 40px;
+        text-decoration: none;
+        background: #ebe4d5;
+        cursor:pointer;
+    }
+}
+@media (min-width: 1024px) and (max-width: 2560px){
+    #okno_wolf_l {                                             /*сами окна*/
+        width: 600px;
+        height: 450px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #2b2211;
+        border-radius: 10px;
+        color: #ebe4d5;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 35px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(143, 120, 103);
+    }
+    #okno_wolf_l > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 45px;
+        text-decoration: none;
+        color: inherit;
+    }
+    #okno_wolf_d {                                             /*сами окна*/
+        width: 600px;
+        height: 450px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 15px;
+        border: 3px solid #000000;
+        border-radius: 10px;
+        color: #d8d8d8;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 35px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: rgb(17, 17, 17);
+    } 
+    #okno_wolf_d > a{
+        position: absolute;
+        right: 3%;
+        top: 1%;
+        font-size: 45px;
+        text-decoration: none;
+        color: inherit;
+    }
+    img[src="img/Чан Ген.jpg"]{
+        height: 300px; 
+        width: 260px;
+        float: left; 
+        padding-left: 5%; 
+        padding-right: 3%;
+    }
+    img[src="img/Гу Юнь.jpg"]{
+        height: 300px; 
+        width: 260px;
+        float: left; 
+        padding-right: 5%;
+    }
+    #okno_wolf_l > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    #okno_wolf_d > div{
+        padding-right: 3%; 
+        padding-left: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .close {                                                /*кнопки в окне*/
+        display: inline-block;
+        border: 1px solid #2b2211;
+        color: #1b1209;
+        padding: 0 12px;    
+        margin: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 40px;
+        text-decoration: none;
+        background: #ebe4d5;
+        cursor:pointer;
+    }
+}
+#ch_2l, #ch_3l, #ch_4l
+{                                                   /*окна с пердупреждениями*/
+    background: rgba(48, 48, 48, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+#ch_2l:target, #ch_3l:target, #ch_4l:target
+{display: block;}
+
+#ch_2d, #ch_3d, #ch_4d
+{                                                   /*окна с пердупреждениями*/
+    background: rgba(48, 48, 48, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#ch_2d:target, #ch_3d:target, #ch_4d:target
+{display: block;}

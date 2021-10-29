@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>Инструкция к игре</title>
-        <link rel="stylesheet" href="page 2/style_for chapters_common.css">
+        <link rel="stylesheet" href="styles/style_for_chapters_common.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <style>
             * {
@@ -111,11 +111,11 @@
                     font-size: 50px;
                 }
                 a{
-                    font-size: 5    5px;
+                    font-size: 55px;
                 }
             }
             body{
-                background-image: url("page 2/Система своё/img/комната.jpg");
+                background-image: url("../static/img/system/room.jpg");
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
@@ -175,7 +175,7 @@
                 </p>
                 <p class="main_text_center">
                     Итак, добро пожаловать в мир SideStory...<br><br><br><br>
-                    <span><a href="page 1/ver 1.1/page_1 (ver.1.2) light.html">Войти</a></span>
+                    <span><a href="/main">Войти</a></span>
                 </p>
             </div>
             <div class="right_block">

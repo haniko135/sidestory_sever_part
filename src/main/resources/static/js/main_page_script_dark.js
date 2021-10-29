@@ -242,7 +242,7 @@ document.onmouseout = function(e) {
 
 
 // модальные окна
-function createInfoBlocks(name, img, choiceYes, choiceNo){
+function createInfoBlocks(name, img, choiceNo){
     //оверлай слой
     let overlay = document.createElement("div");
     overlay.className = "overlay";
