@@ -281,6 +281,34 @@
         background: #ebe4d5;
         cursor:pointer;
     }
+
+    .content_block{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        padding: 25px;
+    }
+    .content_header{
+        font-family: 'Roboto', sans-serif;
+        font-size: 65px;
+        font-weight: bold;
+        color:#c5bba6;
+    }
+    .block_chapter{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: baseline;
+        padding: 12px;
+    }
+    .for_chapters{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 30px;
+    }
+    .for_chapters > a{
+        color: #d1d1d1;
+    }
 }
 #ch_2l, #ch_3l, #ch_4l
 {                                                   /*окна с пердупреждениями*/

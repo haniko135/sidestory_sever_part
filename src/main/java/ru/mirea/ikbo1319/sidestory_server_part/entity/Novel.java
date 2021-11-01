@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="novel")
 @Setter
@@ -14,49 +12,37 @@ import javax.persistence.Id;
 public class Novel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="novelName")
+    @Column(name = "novelName")
     private String novelName;
 
-    @Column(name="novelDescription")
+    @Column(name = "novelDescription")
     @Type(type = "org.hibernate.type.TextType")
     private String novelDescription;
 
-    @Column(name="novelRating")
+    @Column(name = "novelRating")
     private String novelRating;
 
-    @Column(name="novelGenre")
+    @Column(name = "novelGenre")
     private String novelGenre;
 
-    @Column(name="novelAuthor")
+    @Column(name = "novelAuthor")
     private String novelAuthor;
 
-    @Column(name="novelAttention")
+    @Column(name = "novelAttention")
     private String novelAttention;
 
-    @Column(name="ratingAge")
+    @Column(name = "ratingAge")
     private Integer ratingAge;
 
-    @Column(name="novelImg")
+    @Column(name = "novelImg")
     private String novelImg;
 
-    @Column(name="novelContent")
-    private String novelContent;
-
-    @Column(name="novelURL")
+    @Column(name = "novelURL")
     private String novelURL;
 
-    public Novel(){
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
+    public Novel() {
     }
 }

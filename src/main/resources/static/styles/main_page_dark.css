@@ -116,3 +116,9 @@ button:before {
     color: #141414;
     background: #ececec;
 }
+.content_header {
+    color:#c5bba6;
+}
+.for_chapters > a {
+    color: #d1d1d1;
+}

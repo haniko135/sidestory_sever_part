@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>Оглавление</title>
         <link rel="stylesheet" href="styles/main_page_dark.css">         <!--Контент внутри main-->
         <link rel="stylesheet" href="styles/main_page_main_theme.css">
         <link rel="stylesheet" href="styles/oglavlenie.css">
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon"  href="img/favicon.ico" type="image/x-icon">
 
         <!---Иконки для менюшки-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +17,8 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="../../page 1/content/oglavlenie_script_dark.js"></script>
+        <script src="js/oglavlenie_script_dark.js"></script>
+        <link rel="stylesheet" href="../static/styles/oglavlenie.css">
     </head>
     <body class="background">
 
@@ -63,21 +64,12 @@
         </div>
 
         <div id="main">
-            <div>
-                <div class="oglavlenie_block">
-                    <span class="oglavlenie">ОГЛАВЛЕНИЕ</span>
+            <div style="display: flex; flex-direction: column">
+                <div class="content_block">
+                    <span class="content_header">ОГЛАВЛЕНИЕ</span>
                 </div>
-                <div class="block_chapter">
-                    <p class="for_chapters"><a href="Чан Ген/1 глава/ch_1_1.html">Глава 1. Граница</a></p>
-                </div>
-                <div class="block_chapter">
-                    <p class="for_chapters"><a href="#ch_2d">Глава 2. Ифу</a></p>
-                </div>
-                <div class="block_chapter">
-                    <p class="for_chapters"><a href="#ch_3d">Глава 3. Прославленный генерал</a></p>
-                </div>
-                <div class="block_chapter">
-                    <p class="for_chapters"><a href="#ch_4d">Глава 4. Гигантский змей</a></p>
+                <div class="block_chapter" th:each="chapter:${chapters}">
+                    <p class="for_chapters"><a th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}" th:text="${chapter.getNameSource()}"></a></p>
                 </div>
         
         

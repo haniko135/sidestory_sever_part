@@ -2,9 +2,9 @@ package ru.mirea.ikbo1319.sidestory_server_part.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="pages")
 @Getter
@@ -12,19 +12,24 @@ import javax.persistence.Id;
 public class Pages {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="source")
     private String source;
-    private Long novelId;
+
+    @Column(name="start_source")
     private Boolean startSource;
+
+    @Column(name="name_source")
     private String nameSource;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name="current_character")
+    private String currentCharacter;
 
-    @Id
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "novel_id")
+    private Novel novel;
+
+    public Pages(){ }
 }

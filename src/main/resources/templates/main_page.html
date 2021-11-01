@@ -78,7 +78,7 @@
                 <a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" class="headerBlock" target="_self"><b th:text="${novel.getNovelName()}"></b></a>
                 <p class="infoBlock" th:text="${novel.getNovelDescription()}"></p>
                 <div class="playButton">
-                    <a th:href="${novel.getNovelContent()}" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', 'img/age.jpg', '/main_page')">ИГРАТЬ</a>
+                    <a th:href="@{'/content?novelId=' + ${novel.getId()}}" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', 'img/age.jpg', '/main_page')">ИГРАТЬ</a>
                 </div>
             </div>
         </div>

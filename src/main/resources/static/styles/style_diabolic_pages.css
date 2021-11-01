@@ -1,0 +1,33 @@
+.hidden_text_ch{
+    font-family: 'El Messiri', sans-serif;
+    visibility: hidden;
+    text-align: justify;
+}
+.hidden_text_txt{
+    font-family: 'Roboto Condensed', sans-serif;
+    visibility: hidden;
+    text-align: justify;
+}
+.main_text_right{
+    font-family: 'El Messiri', sans-serif;
+    text-align: right;
+    color: #ffffff;
+}
+.main_text_left_characther{
+    font-family: 'El Messiri', sans-serif;
+    text-align: left;
+    color: #ffffff;
+}
+.main_text_center{
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: justify;
+    color: #ffffff;
+}
+a{
+    text-decoration: none;
+    color: #c02727;
+    font-weight: 600;
+}
+a:hover{
+    color: #ec4c4c;
+}
