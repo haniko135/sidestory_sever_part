@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="utf-8">
+        <title>Профиль</title>
+        <link rel="stylesheet" href="/styles/main_page_dark.css" id="theme-link">         <!--Контент внутри main-->
+        <link rel="stylesheet" href="/styles/main_page_main_theme.css">
+        <link rel="stylesheet" href="/styles/profile_styles.css">
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">               <!--Фавиконка-->
+
+        <!---Иконки для менюшки-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Google Fonts Viaoda Libre для заголовков-->
+        <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+        <!--Google Fonts Roboto для основного текста-->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="/js/main_page_script_dark.js"></script>
+    </head>
+    <body>
+        <header id="pageHeader">
+            <a name="home_anchor"></a>
+            <p class="name_style">SideStory</p>
+            <div class="stylish">
+                <div class="img_profile">
+                    <img src="../img/profile.jpg" width="70px">
+                </div>
+                <div class="span_block">
+                    <a class="span_profile" href="/profile" th:text="${user.getUsername()}"></a>
+                    <a class="span_profile" href="/logout">Выйти</a>
+                </div>
+            </div>
+        </header>
+
+        <div id="menuBar">
+            <div class="icon-bar">
+                <a href="#home_anchor" class="active" onclick="dropMenu()" id="menuIcon"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>  
+
+
+        <div id="pageMenu">
+            <div class="icon-bar">
+                <a href="/main" id="homeIcon">
+                    <i class="fa fa-home" data-tooltip="Домой"></i>
+                </a>
+                <a href="#home_anchor" onclick="openNav()" id="searchIcon">
+                    <i class="fa fa-search" data-tooltip="Поиск"></i>
+                </a>
+                <a href="/instruction">
+                    <i class="fa fa-question" data-tooltip="Помощь"></i>
+                </a>
+                <a href="#" onclick="ChangeTheme()">
+                    <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                </a>
+            </div>
+        </div>
+
+
+        <div id="mySidenav" class="sidenav">
+            <p class="search_p">Поиск</p>
+            <form>
+                <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
+                <button type="submit" title="submit"></button>
+            </form>
+            <ul id="menuSearch" th:each="novel:${novelsAll}">
+                <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
+            </ul>
+        </div>
+
+
+
+        <div id="main">
+            <div class="main_info">
+                <img class="profile_img" src="/img/profile.jpg">
+                <div class="text_info">
+                    <p class="profile_username" th:text="${user.getUsername()}"></p>
+                    <form th:action="@{/gender}" class="profile_checkboks" method="post">
+                        <p class="profile_name">Пол: <span th:if="${user.getSex()}" th:text="${user.getSex()}"></span></p>
+                        <label>Мужской
+                            <input class="profile_sex" type="radio" name="sex" value="Мужской">
+                        </label>
+                        <label>Женский
+                            <input class="profile_sex" type="radio" name="sex" value="Женский">
+                        </label>
+                        <p class="profile_name">Возраст:
+                            <span th:if="${user.getAge()}" th:text="${user.getAge()}"></span>
+                            <input type="number" placeholder="Введите свой возраст" class="age" name="age" value="">
+                        </p>
+                        <p class="profile_name">Email:
+                            <span th:if="${user.getEmail()}" th:text="${user.getEmail()}"></span>
+                            <input type="email" placeholder="Введите email" name="email" value="">
+                        </p>
+                        <input type="submit" value="Отправить"></button>
+                    </form>
+                </div>
+            </div>
+            <div class="novels_list">
+                <div class="now_read">
+                    <span>Сейчас читаю</span>
+                    <div class="novel" th:each="nowread:${nowreads}">
+                        <a th:href="@{'/info?novelURL=' +${nowread.getNovelURL()}}">
+                            <img class="profile_novel_image" th:src="@{'/img/' + ${nowread.getNovelImg()}}"></a>
+                        <div class="profile_novel_info">
+                            <a th:href="@{'/info?novelURL=' +${nowread.getNovelURL()}}">
+                                <p class="profile_novel_name" th:text="${nowread.getNovelName()}"></p>
+                            </a>
+                            <div class="wrap_button">
+                                <a th:href="@{'/content?novelId=' + ${nowread.getId()}}"><div class="play_button">ИГРАТЬ</div></a>
+                                <a th:href="@{'/deleteNowReadNovel?novelURL=' + ${nowread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="had_read">
+                    <span>Прочитано</span>
+                    <div class="novel" th:each="hadread:${hadreads}">
+                        <a th:href="@{'/info?novelURL=' +${hadread.getNovelURL()}}">
+                            <img class="profile_novel_image" th:src="@{'/img/' + ${hadread.getNovelImg()}}">
+                        </a>
+                        <div class="profile_novel_info">
+                            <a th:href="@{'/info?novelURL=' +${hadread.getNovelURL()}}">
+                                <p class="profile_novel_name" th:text="${hadread.getNovelName()}"></p>
+                            </a>
+                            <div class="wrap_button">
+                                <a th:href="@{'/content?novelId=' + ${hadread.getId()}}"><div class="play_button">ИГРАТЬ</div></a>
+                                <a th:href="@{'/deleteHadReadNovel?novelURL=' + ${hadread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="footer_info_container">
+                <p class="footer_name_style">
+                    SideStory
+                </p>
+                <div class="mini_map">
+                    <p><a href="#home_anchor">Главная</a></p>
+                    <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
+                    <p><a href="/instruction">Помощь в игре</a></p>
+                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
+                </div>
+            </div>
+            <div class="donate">
+                Админу на печеньки: +7(985)380-27-17
+            </div>
+        </div>
+    </body>
+</html>

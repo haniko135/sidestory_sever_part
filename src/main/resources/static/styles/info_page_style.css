@@ -20,11 +20,19 @@
         color: #beb59f;
         padding-left: 2%;
     }
-    .button_style{                                          /*кнопка*/
+    .bottom{
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .button_style_info{                                          /*кнопка*/
         border: 2px solid #7e6d36;
         text-align: center;
+        padding: 15px;
+        width:350px;
     }
-    .source{                                                /*ссылка кнопки*/
+    .source_info{                                                /*ссылка кнопки*/
         font-family: 'Roboto', sans-serif;
         font-size: 45px;
         color: #beb59f;

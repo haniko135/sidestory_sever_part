@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
 
@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title th:text="${novel.getNovelName()}"></title>
-        <script src="info_pages_script.js"></script>
+        <script src="/js/info_pages_script_dark.js"></script>
     </head>
     <body class="background">
 
@@ -30,7 +30,8 @@
                     <img src="../img/profile.jpg" width="70px">
                 </div>
                 <div class="span_block">
-                    <a class="span_profile" href="">USERNAME</a>
+                    <a class="span_profile" href="/login" sec:authorize="isAnonymous()">Войдите</a>
+                    <a class="span_profile" href="/profile" sec:authorize="isAuthenticated()" th:text="${users.getUsername()}">Войдите</a>
                 </div>
             </div>
         </header>
@@ -43,10 +44,22 @@
 
             <div id="pageMenu">
                     <div class="icon-bar">
-                        <a href="/main"><i class="fa fa-home"></i></a>
-                        <a href="#main-anchor" onclick="openNav()" id="searchIcon"><i class="fa fa-search"></i></a>
-                        <a href="/instruction"><i class="fa fa-question"></i></a>
-                        <a href="../pages with info about stories (ver 1.1) light/Wolf_info (ver 1.1).html"><i class="fa fa-adjust"></i></a>
+                        <a href="/main">
+                            <i class="fa fa-home"></i>
+                        </a>
+                        <a href="#main_anchor" onclick="openNav()" id="searchIcon">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <a href="/instruction">
+                            <i class="fa fa-question"></i>
+                        </a>
+                        <a href="../pages with info about stories (ver 1.1) light/Wolf_info (ver 1.1).html">
+                            <i class="fa fa-adjust"></i>
+                        </a>
+                        <a th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a th:href="@{/hadReadNovelToProfile(novelURL=${novel.getNovelURL()})}"><i class="fa fa-check"></i></a>
                     </div>
             </div>
 
@@ -75,8 +88,9 @@
                 <div class="p_info"><b class="attention">Возрастное ограничение:</b><span th:text="${novel.getRatingAge()}"></span>+</div>
 
                 <div class="bottom">
-                    <div class="button_style">
-                        <a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>
+                    <div class="button_style_info">
+                        <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
+                        <a class="source_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">ИГРАТЬ</a>
                     </div>
                 </div>
             </div>

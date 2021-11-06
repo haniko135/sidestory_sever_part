@@ -1,6 +1,8 @@
 package ru.mirea.ikbo1319.sidestory_server_part.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Novel;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Pages;
+import ru.mirea.ikbo1319.sidestory_server_part.entity.Users;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.NovelRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.PagesRepo;
+import ru.mirea.ikbo1319.sidestory_server_part.repository.UsersRepo;
 
 import java.util.ArrayList;
 
@@ -23,11 +27,17 @@ public class DefaultController {
     @Autowired
     PagesRepo pagesRepo;
 
+    @Autowired
+    UsersRepo usersRepo;
+
     @GetMapping("/main")
     public String mainPage(Model model){
         Iterable<Novel> novels = novelRepo.findAll();
         model.addAttribute("novels", novels);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users activeUser = usersRepo.findByUsername(auth.getName());
+        model.addAttribute("users", activeUser);
         return "main_page";
     }
 
@@ -38,6 +48,10 @@ public class DefaultController {
 
         Novel novels1 = novelRepo.findAllByNovelURL(novelURL);
         model.addAttribute("novel",novels1);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users activeUser = usersRepo.findByUsername(auth.getName());
+        model.addAttribute("users", activeUser);
         return "info";
     }
 
