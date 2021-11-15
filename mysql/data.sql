@@ -29,18 +29,6 @@ create table pages
         foreign key (novel_id) references novel (id)
 );
 
-create table spring_session
-(
-    id                 bigint auto_increment
-        primary key,
-    session_id         varchar(36) not null,
-    creation_time      bigint not null,
-    last_access_time   bigint not null,
-    max_inactive_interval int not null,
-    expiry_time        bigint not null,
-    principal_name     varchar(127) null
-)
-
 
 
 insert into novel value ('1', 'насилие, гуро, восхождение с низов', 'Ван Ю', 'Бедный и обычный мальчик из деревни присоединяется к небольшой секте в Цзян Ху и случайно становится Неофициальным Учеником. Как Хань Ли, простолюдин по происхождению, создаст для себя точку опоры в его секте? Как он, со своими посредственными способностями, сможет успешно пройти путь культивации и стать бессмертным? Эта история об обычном смертном, который, несмотря на все трудности, сразится с демонами и древними небожителями для того, чтобы найти свой собственный путь к бессмертию.', 'новелла, приключение, боевые искусства, уся', 'puteshestvie-k-bessmertiyu.jpg', 'Путешествие к бессмертию', 'R','16', 'adventure_to_immortal');

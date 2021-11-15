@@ -62,6 +62,10 @@ public class DefaultController {
 
         ArrayList<Pages> chapters = pagesRepo.findAllByNovel_IdAndAndStartSourceIsTrue(novelId);
         model.addAttribute("chapters", chapters);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users activeUser = usersRepo.findByUsername(auth.getName());
+        model.addAttribute("users", activeUser);
         return "content";
     }
 

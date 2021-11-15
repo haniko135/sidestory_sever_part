@@ -77,6 +77,9 @@ body{
 .span_profile{
     color: #fcfcfc;
 }
+.span_block_p:hover{
+    background-color: rgba(239, 239, 239, 0.34);
+}
 .icon-bar a {
     color: #fcfcfc;
 }

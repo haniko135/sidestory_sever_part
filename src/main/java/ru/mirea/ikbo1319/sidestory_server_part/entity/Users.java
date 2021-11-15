@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -20,27 +19,26 @@ public class Users {
     private Long id;
 
     @Size(min=4, max=128)
-    @NotNull
     @NotBlank(message = "Логин не должен быть пустым")
     private String username;
 
     @Size(min=8, max=100)
-    @NotNull
     @NotBlank(message = "Пароль не должен быть пустым")
     private String password;
 
     private boolean active;
 
-    @Transient
-    @NotBlank(message = "Поле подтверждения пароля не должно быть пустым")
-    private String passwordConfirm;
+    //@Transient
+    //@NotBlank(message = "Поле подтверждения пароля не должно быть пустым")
+    //private String passwordConfirm;
 
-    @Email
     private String email;
 
     private String sex;
 
     private Integer age;
+
+    private String img;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "hadread_users",

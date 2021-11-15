@@ -1,15 +1,21 @@
 .main_info{
     display: flex;
     flex-direction: row;
-    height: 350px;
+    height: 400px;
     padding: 35px 50px;
     justify-content: space-between;
 }
 .profile_img{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 5px;
     height: 95%;
     width: 25%;
+}
+.profile_img > img{
+    width:200px;
+    height: 300px;
 }
 .text_info{
     display: flex;

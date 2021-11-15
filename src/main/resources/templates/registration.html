@@ -29,7 +29,6 @@
                 </div>
                 <div class="span_block">
                     <a class="span_profile" href="/login" sec:authorize="isAnonymous()">Войдите</a>
-                    <a class="span_profile" href="/profile" sec:authorize="isAuthenticated()" th:text="${users.getUsername()}">Войдите</a>
                 </div>
             </div>
         </header>
@@ -43,7 +42,7 @@
 
         <div id="pageMenu">
             <div class="icon-bar">
-                <a href="#home_anchor" id="homeIcon">
+                <a href="/main" id="homeIcon">
                     <i class="fa fa-home" data-tooltip="Домой"></i>
                 </a>
                 <a href="/instruction">
@@ -61,16 +60,19 @@
                 <p class="login_header">Регистрация</p>
                 <p class="help_text">Зарегистрируйтесь, чтобы получить полный доступ к возможностям сайта</p>
                 <div class="form_login">
-                    <form th:action="@{/registration}" method="post">
+                    <form th:action="@{/registration}" th:object="${user}" method="post">
                         <label for="username">Username:
-                            <input type="text" id="username" name="username" class="input_login" placeholder="Логин">
+                            <input type="text" th:field="*{username}" id="username" name="username" class="input_login" placeholder="Логин">
                         </label>
-                        <!--<div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('*{username}')}" th:errors="*{username}">Name error</div>-->
+                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
                         <label for="password">Password:
-                            <input type="password" id="password" name="password" class="input_login" placeholder="Пароль">
+                            <input type="password" th:field="*{password}" id="password" name="password" class="input_login" placeholder="Пароль">
                         </label>
-                        <!--<div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
-                        <!--<label for="password2">Repeat password: <input type="password" id="password2" th:name="passwordConfirm" class="input_login" placeholder="Пароль"></label>-->
+                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
+                        <!--<label for="password2">Repeat password:
+                            <input type="password" th:field="*{passwordConfirm}" id="password2" name="passwordConfirm" class="input_login" placeholder="Пароль">
+                        </label>
+                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{password}">Password error</div>-->
                         <input class="button_sub" type="submit" value="Отправить">
                     </form>
                 </div>

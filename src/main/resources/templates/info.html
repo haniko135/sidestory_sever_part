@@ -27,11 +27,22 @@
             <p class="name_style">SideStory</p>
             <div class="stylish">
                 <div class="img_profile">
-                    <img src="../img/profile.jpg" width="70px">
+                    <img sec:authorize="isAnonymous()" src="/img/profile.jpg" width="70px">
+                    <p sec:authorize="isAuthenticated()">
+                        <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}" width="70px" height="70px">
+                        <img th:unless="${users.getImg()}" src="/img/profile.jpg" width="70px">
+                    </p>
                 </div>
                 <div class="span_block">
-                    <a class="span_profile" href="/login" sec:authorize="isAnonymous()">Войдите</a>
-                    <a class="span_profile" href="/profile" sec:authorize="isAuthenticated()" th:text="${users.getUsername()}">Войдите</a>
+                    <p class="span_block_p" sec:authorize="isAnonymous()">
+                        <a class="span_profile" href="/login">Войдите</a>
+                    </p>
+                    <p class="span_block_p" sec:authorize="isAuthenticated()">
+                        <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                    </p>
+                    <p class="span_block_p"  sec:authorize="isAuthenticated()">
+                        <a class="span_profile" th:href="@{/logout}">Выйти</a>
+                    </p>
                 </div>
             </div>
         </header>

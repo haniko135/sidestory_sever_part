@@ -25,11 +25,16 @@
             <p class="name_style">SideStory</p>
             <div class="stylish">
                 <div class="img_profile">
-                    <img src="../img/profile.jpg" width="70px">
+                    <img th:if="${user.getImg()}" th:src="@{'/usersImages/'+${user.getImg()}}" width="70px" height="70px">
+                    <img th:unless="${user.getImg()}" src="/img/profile.jpg" width="70px">
                 </div>
                 <div class="span_block">
-                    <a class="span_profile" href="/profile" th:text="${user.getUsername()}"></a>
-                    <a class="span_profile" href="/logout">Выйти</a>
+                    <p class="span_block_p">
+                        <a class="span_profile" href="/profile" th:text="${user.getUsername()}"></a>
+                    </p>
+                    <p class="span_block_p">
+                        <a class="span_profile" href="/logout">Выйти</a>
+                    </p>
                 </div>
             </div>
         </header>
@@ -74,7 +79,15 @@
 
         <div id="main">
             <div class="main_info">
-                <img class="profile_img" src="/img/profile.jpg">
+                <div class="profile_img">
+                    <img th:if="${user.getImg()}" th:src="@{'/usersImages/'+${user.getImg()}}"><br>
+                    <img th:unless="${user.getImg()}" src="/img/profile.jpg"><br><br>
+                    <form method="post" th:action="@{'/profileAva'}" enctype="multipart/form-data">
+                        <input style="margin-top: 25px" type="file" name="file">
+                        <input style="margin-top: 5px" type="submit" value="Добавить фотографию">
+                    </form>
+
+                </div>
                 <div class="text_info">
                     <p class="profile_username" th:text="${user.getUsername()}"></p>
                     <form th:action="@{/gender}" class="profile_checkboks" method="post">

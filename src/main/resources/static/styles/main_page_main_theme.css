@@ -307,12 +307,19 @@
         margin-right: 5px;
     }
     .span_profile{
-        font-size: 20px;
+        font-size: 25px;
         text-decoration: none;
         font-family: 'Viaoda Libre', cursive;
     }
     .span_block{
+        display: flex;
+        flex-direction: column;
         align-self: center;
+    }
+    .span_block_p{
+        padding: 5px 7px;
+        margin-left: 12px;
+        margin-right: 12px;
     }
     .icon-bar {
         width: auto;
@@ -533,7 +540,14 @@
         font-family: 'Viaoda Libre', cursive;
     }
     .span_block{
+        display: flex;
+        flex-direction: column;
         align-self: center;
+    }
+    .span_block_p{
+        padding: 5px 12px;
+        margin-left: 12px;
+        margin-right: 12px;
     }
     .icon-bar {
         width: auto; 

@@ -28,8 +28,15 @@
                     <img src="/img/profile.jpg" width="70px">
                 </div>
                 <div class="span_block">
-                    <a class="span_profile" href="/login" sec:authorize="isAnonymous()">Войдите</a>
-                    <a class="span_profile" href="/profile" sec:authorize="isAuthenticated()" th:text="${users.getUsername()}">Войдите</a>
+                    <p class="span_block_p" sec:authorize="isAnonymous()">
+                        <a class="span_profile" href="/login">Войдите</a>
+                    </p>
+                    <p class="span_block_p" sec:authorize="isAuthenticated()">
+                        <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                    </p>
+                    <p class="span_block_p"  sec:authorize="isAuthenticated()">
+                        <a class="span_profile" th:href="@{/logout}">Выйти</a>
+                    </p>
                 </div>
             </div>
         </header>

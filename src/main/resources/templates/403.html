@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error 403</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #0e0e0e;
+        }
+        h1{
+            color: #c7c7c7;
+            font-size: 120px;
+            text-align: center;
+        }
+        h2{
+            text-align: center;
+            font-size: 56px;
+            color: white;
+        }
+        h3{
+            margin-top: 15px;
+            text-align: center;
+            color: #ffffff;
+        }
+        div{
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>403</h1>
+    <h2>Sorry, you do not have permission to view this page.</h2>
+
+    <h3>Click <a href="/main">here</a>to go back to the Homepage.</h3>
+
+    <div>
+        <img th:src="@{'/img/sad_memes.jpg'}">
+    </div>
+</body>
+</html>
