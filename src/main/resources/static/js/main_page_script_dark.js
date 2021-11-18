@@ -1,112 +1,35 @@
-var link = document.getElementById("theme-link");
-var currThemeForAll = "dark_theme"; //только для локал варианта
-
-function ChangeTheme()
-{
-    let lightTheme = "all_styles/main_page_light.css";
-    let darkTheme = "all_styles/main_page_dark.css";
-    var currTheme = link.getAttribute("href");
-    var theme = "";
-
-    if(currTheme == lightTheme) {
-   	    currTheme = darkTheme;
-        theme = "dark";
-        currThemeForAll = "dark_theme";   
-        console.log(currThemeForAll);
-    }
-    else {    
-   	    currTheme = lightTheme;
-        theme = "light";
-        currThemeForAll = "light_theme";
-        console.log(currThemeForAll);   
-    }
-
-    link.setAttribute("href", currTheme);
-
-    Save(theme);
-}
-
-function Save(theme)
-{
-    var Request = new XMLHttpRequest();
-    Request.open("GET", "./themes.php?theme=" + theme, true);
-    Request.send();
-}
-
-
-
-//готов код 
 let j = 0;
 function openNav() {
-    console.log(currThemeForAll);
-    if(currThemeForAll == "dark_theme"){
-        if(document.documentElement.clientWidth > 700){
-            if(j == 0){
-                document.getElementById("mySidenav").style.width = "25%";
-                document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
-                document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
-                document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                j++;
-            }
-            else if(j == 1){
-                document.getElementById("mySidenav").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("searchIcon").style.backgroundColor = "";
-                document.getElementById("homeIcon").style.backgroundColor = "";
-                j--;
-            }
+    if(document.documentElement.clientWidth > 700){
+        if(j == 0){
+            document.getElementById("mySidenav").style.width = "25%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+            document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
+            document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            j++;
         }
-        else if(document.documentElement.clientWidth <= 700){
-            if(j == 0){
-                document.getElementById("mySidenav").style.width = "45%";
-                document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
-                document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
-                document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                j++;
-            }
-            else if(j == 1){
-                document.getElementById("mySidenav").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("searchIcon").style.backgroundColor = "";
-                document.getElementById("homeIcon").style.backgroundColor = "";
-                j--;
-            }
+        else if(j == 1){
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "";
+            document.getElementById("searchIcon").style.backgroundColor = "";
+            document.getElementById("homeIcon").style.backgroundColor = "";
+            j--;
         }
     }
-    else if(currThemeForAll == "light_theme"){
-        if(document.documentElement.clientWidth > 700){
-            if(j == 0){
-                document.getElementById("mySidenav").style.width = "25%";
-                document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-                document.getElementById("searchIcon").style.backgroundColor = "#857154";
-                document.getElementById("homeIcon").style.backgroundColor = "rgba(157, 157, 157, 0.1)";
-                j++;
-            }
-            else if(j == 1){
-                document.getElementById("mySidenav").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("searchIcon").style.backgroundColor = "";
-                document.getElementById("homeIcon").style.backgroundColor = "";
-                document.getElementById("menuIcon").style.backgroundColor = "";
-                j--;
-            }
+    else if(document.documentElement.clientWidth <= 700){
+        if(j == 0){
+            document.getElementById("mySidenav").style.width = "45%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+            document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
+            document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            j++;
         }
-        else if(document.documentElement.clientWidth <= 700){
-            if(j == 0){
-                document.getElementById("mySidenav").style.width = "45%";
-                document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-                document.getElementById("searchIcon").style.backgroundColor = "#857154";
-                document.getElementById("homeIcon").style.backgroundColor = "rgba(157, 157, 157, 0.1)";
-                j++;
-            }
-            else if(j == 1){
-                document.getElementById("mySidenav").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("searchIcon").style.backgroundColor = "";
-                document.getElementById("homeIcon").style.backgroundColor = "";
-                document.getElementById("menuIcon").style.backgroundColor = "";
-                j--;
-            }
+        else if(j == 1){
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "";
+            document.getElementById("searchIcon").style.backgroundColor = "";
+            document.getElementById("homeIcon").style.backgroundColor = "";
+            j--;
         }
     }
 }
@@ -116,72 +39,36 @@ function openNav() {
 //выпадающее меню
 let i = 0;
 function dropMenu(){
-    if(currThemeForAll == "dark_theme"){
-        if(document.documentElement.clientWidth > 700){
-            if(i == 0){
-                document.getElementById("pageMenu").style.width="9.5%";
-                document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
-                document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                i++;
-            }
-            else if(i == 1){
-                document.getElementById("pageMenu").style.width = "0";
-                document.body.style.backgroundColor = "#0e0e0e";
-                document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
-                document.getElementById("menuBar").style.backgroundColor = "#ceba85";
-                i--;
-            }
+    if(document.documentElement.clientWidth > 700){
+        if(i == 0){
+            document.getElementById("pageMenu").style.width="9.5%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
+            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            i++;
         }
-        else if(document.documentElement.clientWidth <= 700){
-            if(i == 0){
-                document.getElementById("pageMenu").style.width="19.5%";
-                document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
-                document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                i++;
-            }
-            else if(i == 1){
-                document.getElementById("pageMenu").style.width = "0";
-                document.body.style.backgroundColor = "#0e0e0e";
-                document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
-                document.getElementById("menuBar").style.backgroundColor = "#ceba85";
-                i--;
-            }
-        } 
+        else if(i == 1){
+            document.getElementById("pageMenu").style.width = "0";
+            document.body.style.backgroundColor = "#0e0e0e";
+            document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
+            document.getElementById("menuBar").style.backgroundColor = "#ceba85";
+            i--;
+        }
     }
-    else if(currThemeForAll == "light_theme"){
-        if(document.documentElement.clientWidth > 700){
-            if(i == 0){
-                document.getElementById("pageMenu").style.width="9.5%";
-                document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-                document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                i++;
-            }
-            else if(i == 1){
-                document.getElementById("pageMenu").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("menuIcon").style.backgroundColor = "";
-                document.getElementById("menuBar").style.backgroundColor = "";
-                i--;
-            }
+    else if(document.documentElement.clientWidth <= 700){
+        if(i == 0){
+            document.getElementById("pageMenu").style.width="19.5%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
+            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+            i++;
         }
-        else if(document.documentElement.clientWidth <= 700){
-            if(i == 0){
-                document.getElementById("pageMenu").style.width="19.5%";
-                document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-                document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-                i++;
-            }
-            else if(i == 1){
-                document.getElementById("pageMenu").style.width = "0";
-                document.body.style.backgroundColor = "";
-                document.getElementById("menuIcon").style.backgroundColor = "";
-                document.getElementById("menuBar").style.backgroundColor = "";
-                i--;
-            }
+        else if(i == 1){
+            document.getElementById("pageMenu").style.width = "0";
+            document.body.style.backgroundColor = "#0e0e0e";
+            document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
+            document.getElementById("menuBar").style.backgroundColor = "#ceba85";
+            i--;
         }
     }
 }

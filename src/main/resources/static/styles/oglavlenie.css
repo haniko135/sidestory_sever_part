@@ -293,7 +293,6 @@
         font-family: 'Roboto', sans-serif;
         font-size: 65px;
         font-weight: bold;
-        color:#c5bba6;
     }
     .block_chapter{
         display: flex;
@@ -305,9 +304,6 @@
     .for_chapters{
         font-family: 'Roboto Condensed', sans-serif;
         font-size: 30px;
-    }
-    .for_chapters > a{
-        color: #d1d1d1;
     }
 }
 #ch_2l, #ch_3l, #ch_4l

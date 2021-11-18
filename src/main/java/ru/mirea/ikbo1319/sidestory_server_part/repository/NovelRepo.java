@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface NovelRepo extends CrudRepository<Novel, Long> {
     Novel findAllByNovelURL(String novelURL);
+    Novel findAllById(Long id);
 }

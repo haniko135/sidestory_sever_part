@@ -51,11 +51,11 @@ body{
 .playButton{                                          /*кнопка*/
     border: 2px solid #6b6b6b;
 }
-.playButton:hover{                                          /*кнопка*/
+.playButton:hover, .button_style_info:hover{                                          /*кнопка*/
     background: radial-gradient(#dbc7a7, #83683d);
     border: 2px solid #412a14;
 }
-.source{
+.source, .source_info{
     color: #383429;
 }
 .name_style{
@@ -117,4 +117,61 @@ button:before {
     border: 1px solid #2b2211;
     color: #1b1209;
     background: #ebe4d5;
+}
+.content_header {
+    color: #524833;
+}
+.for_chapters > a {
+    color: #675014;
+}
+.main_info{
+    border-bottom: 2px solid rgb(75, 59, 28);
+}
+.profile_username{
+    color: #d8d8d8;
+}
+.profile_checkboks > p{
+    color: #675014;
+}
+.profile_info{
+    color: #675014;
+}
+.now_read{
+    border-right: 3px solid rgb(75, 59, 28);
+}
+.now_read > span, .had_read > span{
+    color: #ffffff;
+    border-bottom: 2px solid rgb(75, 59, 28);
+    background-color: #ceba85;
+}
+.novel{
+    border: 2px solid rgb(173, 173, 173);
+    background-color: #141414;
+}
+.novel:hover{
+    border: none;
+    background-color: #252525;
+}
+.profile_novel_name{
+    color: #675014;
+}
+.play_button{
+    border: 2px solid #7e6d36;
+    color: #675014;
+}
+.play_button:hover{
+    background: radial-gradient(#a7965e, #7e6d36);
+    border: 2px solid #272727;
+}
+.login_header{
+    color: #d8d8d8;
+}
+.help_text{
+    color: #d8d8d8;
+}
+.form_login > form > label{
+    color: #675014;
+}
+.profile_checkboks > label{
+    color: #675014;
 }

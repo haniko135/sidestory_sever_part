@@ -5,7 +5,7 @@
 
         <link rel="stylesheet" href="styles/info_page_style.css"> >         <!--Контент внутри main-->
         <link rel="stylesheet" href="styles/main_page_main_theme.css">                  <!--Хедер-->
-        <link rel="stylesheet" href="styles/main_page_dark.css">>          <!--Менюшка-->
+        <link rel="stylesheet" th:href="${theme}">         <!--Менюшка-->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">               <!--Фавиконка-->
         
         <!---Иконки для менюшки-->
@@ -18,7 +18,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title th:text="${novel.getNovelName()}"></title>
-        <script src="/js/info_pages_script_dark.js"></script>
+        <script th:if="${theme.equals('styles/main_page_dark.css')}" src="/js/info_pages_script_dark.js"></script>
+        <script th:if="${theme.equals('styles/main_page_light.css')}" src="/js/info_pages_script_light.js"></script>
     </head>
     <body class="background">
 
@@ -64,8 +65,11 @@
                         <a href="/instruction">
                             <i class="fa fa-question"></i>
                         </a>
-                        <a href="../pages with info about stories (ver 1.1) light/Wolf_info (ver 1.1).html">
-                            <i class="fa fa-adjust"></i>
+                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=dark'}">
+                            <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                        </a>
+                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=light'}">
+                            <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
                         </a>
                         <a th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
                             <i class="fa fa-plus"></i>
@@ -115,7 +119,16 @@
                     <p><a href="#home_anchor">Главная</a></p>
                     <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
                     <p><a href="/instruction">Помощь в игре</a></p>
-                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info&nameTheme=dark'}">
+                            Светлая тема
+                        </a>
+                    </p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info&nameTheme=light'}">
+                            Темная тема
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="donate">

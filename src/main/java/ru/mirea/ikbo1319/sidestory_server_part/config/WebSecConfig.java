@@ -1,19 +1,31 @@
 package ru.mirea.ikbo1319.sidestory_server_part.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.jdbc.JdbcIndexedSessionRepository;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableJdbcHttpSession
 @EnableWebSecurity
 public class WebSecConfig extends WebSecurityConfigurerAdapter {
 
@@ -33,29 +45,36 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
         return new MyAccessDeniedHandler();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "info", "/instruction", "/main", "content", "/registration?**", "/static/**", "/profileAva", "/usersImages/**")
-                .permitAll()
+                    .antMatchers("/", "info", "/instruction", "/main", "content", "/registration?**", "/static/**", "/profileAva", "/usersImages/**")
+                    .permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/profile?*", "game_pages/**/**/**", "/addNovelToProfile?**",
+                    .authorizeRequests()
+                        .antMatchers("/profile?*", "game_pages/**/**/**", "/addNovelToProfile?**",
                         "/hadReadNovelToProfile?**", "/deleteHadReadNovel?**", "/deleteNowReadNovel?**")
-                .hasRole("USER")
+                        .hasRole("USER")
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/main", true)
-                .permitAll()
+                    .formLogin()
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/main", true)
+                        .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/main")
-                .permitAll()
+                    .rememberMe()
                 .and()
-                .exceptionHandling().accessDeniedPage("/403");
+                    .logout()
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/main")
+                        .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(ClearSiteDataHeaderWriter.Directive.ALL)))
+                        .permitAll()
+                .and()
+                    .exceptionHandling().accessDeniedPage("/403");
     }
 
     @Override
