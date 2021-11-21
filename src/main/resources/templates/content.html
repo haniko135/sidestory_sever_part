@@ -86,10 +86,12 @@
                     <span class="content_header">ОГЛАВЛЕНИЕ</span>
                 </div>
                 <div class="block_chapter" th:each="chapter:${chapters}">
-                    <p class="for_chapters"><a th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}" th:text="${chapter.getNameSource()}"></a></p>
+                    <p class="for_chapters">
+                        <a style="display: none" class="ch_href" th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}"></a>
+                        <a href="#" class="an_href" th:text="${chapter.getNameSource()}"></a>
+                    </p>
                 </div>
-        
-        
+
                 <div id="ch_2d">
                     <div id="okno_wolf_d">
                         За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>

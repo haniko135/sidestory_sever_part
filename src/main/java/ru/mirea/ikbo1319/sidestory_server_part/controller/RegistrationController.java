@@ -17,20 +17,18 @@ import ru.mirea.ikbo1319.sidestory_server_part.entity.Users;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.NovelRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.UsersRepo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.*;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
-public class RegistrationController {
+public class RegistrationController{
+    @Autowired
+    HttpSession session;
 
     @Autowired
     UsersRepo usersRepo;
@@ -44,24 +42,8 @@ public class RegistrationController {
     @Value("${upload.path}")
     String imgsPath;
 
-    @GetMapping("/registration")
-    public String registration(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
-        if(!model.containsAttribute("user")){
-            model.addAttribute("user", new Users());
-        }
-        return "registration";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
-        return "login";
-    }
+    private String lightThemePath = "styles/main_page_light.css";
+    private String darkThemePath = "styles/main_page_dark.css";
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
@@ -73,14 +55,23 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult){
+    public String addUser(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
+            String color = (String) session.getAttribute("THEME-SESSION");
+            System.out.println("здеся");
+            if(color == null){
+                model.addAttribute("theme", lightThemePath);
+            }
+            else {
+                if (color.equals("light")) {
+                    model.addAttribute("theme", lightThemePath);
+                } else {
+                    model.addAttribute("theme", darkThemePath);
+                }
+            }
             return "/registration";
         }
         else{
-            //if (user.getPassword() != null && !user.getPassword().equals(user.getPasswordConfirm())){
-                //System.out.println("Пароли разные");
-            //}
             Users users = usersRepo.findByUsername(user.getUsername());
             if (users != null){
                 System.out.println("Пользователь существует!");
@@ -95,28 +86,6 @@ public class RegistrationController {
 
             return "redirect:/login";
         }
-    }
-
-    @GetMapping("/profile")
-    public String profile(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users users = usersRepo.findByUsername(auth.getName());
-        if(users == null){
-            return "redirect:/login";
-        }
-
-        model.addAttribute("user",users);
-
-        Iterable<Novel> novels = novelRepo.findAll();
-        model.addAttribute("novelsAll", novels);
-
-        Set<Novel> novelSetNow = users.getNowReadNovel();
-        model.addAttribute("nowreads", novelSetNow);
-
-        Set<Novel> novelSetHave = users.getHaveReadNovel();
-        model.addAttribute("hadreads", novelSetHave);
-
-        return "profile";
     }
 
     @RequestMapping("/profileAva")
@@ -158,18 +127,31 @@ public class RegistrationController {
         Novel novel = novelRepo.findAllByNovelURL(novelURL);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users users = usersRepo.findByUsername(auth.getName());
-        AtomicBoolean isNovelURLInSet = new AtomicBoolean(false);
-        users.getNowReadNovel().forEach(novel1 -> {
-            if(novel1.getNovelURL().equals(novelURL)){
-                isNovelURLInSet.set(true);
-            }
-        });
-        if(!isNovelURLInSet.get()){
-            users.getNowReadNovel().add(novel);
-            usersRepo.save(users);
+        if(users == null){
+            return "redirect:/login";
         }
+        else {
+            AtomicBoolean isNovelURLInSet = new AtomicBoolean(false);
+            users.getNowReadNovel().forEach(novel1 -> {
+                if (novel1.getNovelURL().equals(novelURL)) {
+                    isNovelURLInSet.set(true);
+                }
+            });
+            if (!isNovelURLInSet.get()) {
+                AtomicBoolean isNovelURLInSetHadRead = new AtomicBoolean(false);
+                users.getHaveReadNovel().forEach(novel1 -> {
+                    if (novel1.getNovelURL().equals(novelURL)){
+                        isNovelURLInSetHadRead.set(true);
+                    }
+                });
+                if(!isNovelURLInSetHadRead.get()){
+                    users.getNowReadNovel().add(novel);
+                    usersRepo.save(users);
+                }
+            }
 
-        return "redirect:/info?novelURL="+novelURL;
+            return "redirect:/info?novelURL=" + novelURL;
+        }
     }
 
     @RequestMapping("/hadReadNovelToProfile")
@@ -177,18 +159,31 @@ public class RegistrationController {
         Novel novel = novelRepo.findAllByNovelURL(novelURL);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users users = usersRepo.findByUsername(auth.getName());
-        AtomicBoolean isNovelURLInSet = new AtomicBoolean(false);
-        users.getHaveReadNovel().forEach(novel1 -> {
-            if(novel1.getNovelURL().equals(novelURL)){
-                isNovelURLInSet.set(true);
-            }
-        });
-        if(!isNovelURLInSet.get()){
-            users.getHaveReadNovel().add(novel);
-            usersRepo.save(users);
+        if(users == null){
+            return "redirect:/login";
         }
+        else {
+            AtomicBoolean isNovelURLInSet = new AtomicBoolean(false);
+            users.getHaveReadNovel().forEach(novel1 -> {
+                if (novel1.getNovelURL().equals(novelURL)) {
+                    isNovelURLInSet.set(true);
+                }
+            });
+            if (!isNovelURLInSet.get()) {
+                AtomicBoolean isNovelURLInSetNowRead = new AtomicBoolean(false);
+                users.getNowReadNovel().forEach(novel1 -> {
+                    if (novel1.getNovelURL().equals(novelURL)){
+                        isNovelURLInSetNowRead.set(true);
+                    }
+                });
+                if(!isNovelURLInSetNowRead.get()) {
+                    users.getHaveReadNovel().add(novel);
+                    usersRepo.save(users);
+                }
+            }
 
-        return "redirect:/info?novelURL="+novelURL;
+            return "redirect:/info?novelURL=" + novelURL;
+        }
     }
 
     @RequestMapping("/deleteHadReadNovel")

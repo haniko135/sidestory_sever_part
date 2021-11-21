@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Профиль</title>
-        <link rel="stylesheet" href="/styles/main_page_dark.css" id="theme-link">         <!--Контент внутри main-->
+        <link rel="stylesheet" th:href="${theme}">         <!--Контент внутри main-->
         <link rel="stylesheet" href="/styles/main_page_main_theme.css">
         <link rel="stylesheet" href="/styles/profile_styles.css">
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">               <!--Фавиконка-->
@@ -16,8 +16,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <script src="/js/main_page_script_dark.js"></script>
+
+        <script th:if="${theme.equals('styles/main_page_dark.css')}" src="/js/main_page_script_dark.js"></script>
+        <script th:if="${theme.equals('styles/main_page_light.css')}" src="/js/main_page_script_light.js"></script>
     </head>
     <body>
         <header id="pageHeader">
@@ -57,8 +58,11 @@
                 <a href="/instruction">
                     <i class="fa fa-question" data-tooltip="Помощь"></i>
                 </a>
-                <a href="#" onclick="ChangeTheme()">
+                <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=profile&nameTheme=dark'}">
                     <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                </a>
+                <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=profile&nameTheme=light'}">
+                    <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
                 </a>
             </div>
         </div>
@@ -91,18 +95,18 @@
                 <div class="text_info">
                     <p class="profile_username" th:text="${user.getUsername()}"></p>
                     <form th:action="@{/gender}" class="profile_checkboks" method="post">
-                        <p class="profile_name">Пол: <span th:if="${user.getSex()}" th:text="${user.getSex()}"></span></p>
+                        <p class="profile_name"><b>Пол:</b> <span th:if="${user.getSex()}" th:text="${user.getSex()}"></span></p>
                         <label>Мужской
                             <input class="profile_sex" type="radio" name="sex" value="Мужской">
                         </label>
                         <label>Женский
                             <input class="profile_sex" type="radio" name="sex" value="Женский">
                         </label>
-                        <p class="profile_name">Возраст:
+                        <p class="profile_name"><b>Возраст:</b>
                             <span th:if="${user.getAge()}" th:text="${user.getAge()}"></span>
-                            <input type="number" placeholder="Введите свой возраст" class="age" name="age" value="">
+                            <input type="number" min="1" max="123" placeholder="Введите свой возраст" class="age" name="age" value="">
                         </p>
-                        <p class="profile_name">Email:
+                        <p class="profile_name"><b>Email:</b>
                             <span th:if="${user.getEmail()}" th:text="${user.getEmail()}"></span>
                             <input type="email" placeholder="Введите email" name="email" value="">
                         </p>
@@ -153,10 +157,19 @@
                     SideStory
                 </p>
                 <div class="mini_map">
-                    <p><a href="#home_anchor">Главная</a></p>
+                    <p><a href="/main">Главная</a></p>
                     <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
                     <p><a href="/instruction">Помощь в игре</a></p>
-                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=profile&nameTheme=dark'}">
+                            Светлая тема
+                        </a>
+                    </p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=profile&nameTheme=light'}">
+                            Темная тема
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="donate">

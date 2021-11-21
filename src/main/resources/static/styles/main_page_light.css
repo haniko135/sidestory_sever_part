@@ -36,8 +36,11 @@ body{
 .infoBlock{
     color: #241d0b;
 }
-.infoBlock a{
+.infoBlock a, .p_info, .h3_info{
     color: #4d4431;
+}
+.attention{
+    color: #3f2f09;
 }
 .infoBlock a:hover{
     color: #887d62;
@@ -128,7 +131,7 @@ button:before {
     border-bottom: 2px solid rgb(75, 59, 28);
 }
 .profile_username{
-    color: #d8d8d8;
+    color: #3f2f09;
 }
 .profile_checkboks > p{
     color: #675014;
@@ -145,12 +148,12 @@ button:before {
     background-color: #ceba85;
 }
 .novel{
-    border: 2px solid rgb(173, 173, 173);
-    background-color: #141414;
+    border: 2px solid rgb(171, 155, 145);
+    background-color: #d9d9d9;
 }
 .novel:hover{
     border: none;
-    background-color: #252525;
+    background-color: #bebebe;
 }
 .profile_novel_name{
     color: #675014;
@@ -164,14 +167,18 @@ button:before {
     border: 2px solid #272727;
 }
 .login_header{
-    color: #d8d8d8;
+    color: #675014;
 }
 .help_text{
-    color: #d8d8d8;
+    color: #675014;
 }
 .form_login > form > label{
     color: #675014;
 }
 .profile_checkboks > label{
     color: #675014;
+}
+.error_messages{
+    background-color: #d0d0d0;
+    color: #1b1209;
 }

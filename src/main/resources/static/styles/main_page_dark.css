@@ -176,3 +176,7 @@ button:before {
 .profile_checkboks > label{
     color: #d1d1d1;
 }
+.error_messages{
+    background-color: #262626;
+    color: #cecece;
+}

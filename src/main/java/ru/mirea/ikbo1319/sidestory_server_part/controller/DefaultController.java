@@ -5,10 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Novel;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Pages;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Users;
@@ -21,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Controller
 public class DefaultController implements HttpSessionListener {
@@ -55,7 +53,7 @@ public class DefaultController implements HttpSessionListener {
     }
 
     @GetMapping("/main")
-    public String mainPage(Model model, HttpServletRequest request){
+    public String mainPage(Model model){
         Iterable<Novel> novels = novelRepo.findAll();
         model.addAttribute("novels", novels);
 
@@ -143,5 +141,85 @@ public class DefaultController implements HttpSessionListener {
         String getNovel = info.getNovel().getNovelURL();
         String getSource = info.getSource();
         return "game_pages/"+getNovel+"/"+getCh+"/"+getSource;
+    }
+
+    @GetMapping("/registration")
+    public String registration(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users activeUser = usersRepo.findByUsername(auth.getName());
+        model.addAttribute("users", activeUser);
+        if(!model.containsAttribute("user")){
+            model.addAttribute("user", new Users());
+        }
+
+        String color = (String) session.getAttribute("THEME-SESSION");
+        System.out.println("здеся");
+        if(color == null){
+            model.addAttribute("theme", lightThemePath);
+        }
+        else {
+            if (color.equals("light")) {
+                model.addAttribute("theme", lightThemePath);
+            } else {
+                model.addAttribute("theme", darkThemePath);
+            }
+        }
+        return "registration";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users activeUser = usersRepo.findByUsername(auth.getName());
+        model.addAttribute("users", activeUser);
+
+        String color = (String) session.getAttribute("THEME-SESSION");
+        System.out.println("здеся");
+        if(color == null){
+            model.addAttribute("theme", lightThemePath);
+        }
+        else {
+            if (color.equals("light")) {
+                model.addAttribute("theme", lightThemePath);
+            } else {
+                model.addAttribute("theme", darkThemePath);
+            }
+        }
+        return "login";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users users = usersRepo.findByUsername(auth.getName());
+        if(users == null){
+            return "redirect:/login";
+        }
+
+        model.addAttribute("user",users);
+
+        Iterable<Novel> novels = novelRepo.findAll();
+        model.addAttribute("novelsAll", novels);
+
+        Set<Novel> novelSetNow = users.getNowReadNovel();
+        model.addAttribute("nowreads", novelSetNow);
+
+        Set<Novel> novelSetHave = users.getHaveReadNovel();
+        model.addAttribute("hadreads", novelSetHave);
+
+        String color = (String) session.getAttribute("THEME-SESSION");
+        System.out.println("здеся");
+        if(color == null){
+            model.addAttribute("theme", lightThemePath);
+        }
+        else {
+            if (color.equals("light")) {
+                model.addAttribute("theme", lightThemePath);
+            } else {
+                model.addAttribute("theme", darkThemePath);
+            }
+        }
+
+        return "profile";
     }
 }

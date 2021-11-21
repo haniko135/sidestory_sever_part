@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Профиль</title>
-        <link rel="stylesheet" href="/styles/main_page_dark.css" id="theme-link">         <!--Контент внутри main-->
+        <link rel="stylesheet" th:href="${theme}">         <!--Контент внутри main-->
         <link rel="stylesheet" href="/styles/main_page_main_theme.css">
         <link rel="stylesheet" href="/styles/profile_styles.css">
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">               <!--Фавиконка-->
@@ -16,8 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <script src="/js/main_page_script_dark.js"></script>
+
     </head>
     <body>
         <header id="pageHeader">
@@ -48,9 +47,6 @@
                 <a href="/instruction">
                     <i class="fa fa-question" data-tooltip="Помощь"></i>
                 </a>
-                <a href="#" onclick="ChangeTheme()">
-                    <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
-                </a>
             </div>
         </div>
 
@@ -64,15 +60,11 @@
                         <label for="username">Username:
                             <input type="text" th:field="*{username}" id="username" name="username" class="input_login" placeholder="Логин">
                         </label>
-                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+                        <div class="error_messages" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
                         <label for="password">Password:
                             <input type="password" th:field="*{password}" id="password" name="password" class="input_login" placeholder="Пароль">
                         </label>
-                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
-                        <!--<label for="password2">Repeat password:
-                            <input type="password" th:field="*{passwordConfirm}" id="password2" name="passwordConfirm" class="input_login" placeholder="Пароль">
-                        </label>
-                        <div style="background-color: red; color: #1b1209" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{password}">Password error</div>-->
+                        <div class="error_messages" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
                         <input class="button_sub" type="submit" value="Отправить">
                     </form>
                 </div>
@@ -85,9 +77,8 @@
                     SideStory
                 </p>
                 <div class="mini_map">
-                    <p><a href="#home_anchor">Главная</a></p>
+                    <p><a href="/main">Главная</a></p>
                     <p><a href="/instruction">Помощь в игре</a></p>
-                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
                 </div>
             </div>
             <div class="donate">

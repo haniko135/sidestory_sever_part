@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>Профиль</title>
-        <link rel="stylesheet" href="/styles/main_page_dark.css" id="theme-link">         <!--Контент внутри main-->
+        <link rel="stylesheet" th:href="${theme}">         <!--Контент внутри main-->
         <link rel="stylesheet" href="/styles/main_page_main_theme.css">
         <link rel="stylesheet" href="/styles/profile_styles.css">
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">               <!--Фавиконка-->
@@ -16,8 +16,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <script src="/js/main_page_script_dark.js"></script>
+
+        <script th:if="${theme.equals('styles/main_page_dark.css')}" src="/js/main_page_script_dark.js"></script>
+        <script th:if="${theme.equals('styles/main_page_light.css')}" src="/js/main_page_script_light.js"></script>
     </head>
     <body>
         <header id="pageHeader">
@@ -56,8 +57,11 @@
                 <a href="/instruction">
                     <i class="fa fa-question" data-tooltip="Помощь"></i>
                 </a>
-                <a href="#" onclick="ChangeTheme()">
+                <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=login&nameTheme=dark'}">
                     <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                </a>
+                <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=login&nameTheme=light'}">
+                    <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
                 </a>
             </div>
         </div>
@@ -70,7 +74,7 @@
                 <div class="form_login">
                     <form th:action="@{/login}" method="post">
                         <label for="username">Username: <input type="text" id="username" name="username" class="input_login" placeholder="Username"></label>
-                        <label for="password">Password<input type="password" id="password" name="password" class="input_login" placeholder="Password"></label>
+                        <label for="password">Password<input type="password"  id="password" name="password" class="input_login" placeholder="Password"></label>
                         <input class="button_sub" type="submit" value="Отправить">
                     </form>
                 </div>
@@ -83,10 +87,18 @@
                     SideStory
                 </p>
                 <div class="mini_map">
-                    <p><a href="#home_anchor">Главная</a></p>
-                    <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
-                    <p><a href="../../instruction.html">Помощь в игре</a></p>
-                    <p><a href="#" onclick="ChangeTheme()">Смена темы сайта</a></p>
+                    <p><a href="/main">Главная</a></p>
+                    <p><a href="/instruction.html">Помощь в игре</a></p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=login&nameTheme=dark'}">
+                            Светлая тема
+                        </a>
+                    </p>
+                    <p>
+                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=login&nameTheme=light'}">
+                            Темная тема
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="donate">
