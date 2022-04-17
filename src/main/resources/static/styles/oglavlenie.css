@@ -54,26 +54,26 @@
         color: inherit;
     }
     img[src="img/Чан Ген.jpg"]{
-        height: 45%; 
+        height: 45%;
         width: 45%;
-        float: left; 
-        padding-left: 1%; 
+        float: left;
+        padding-left: 1%;
         padding-right: 3%;
     }
     img[src="img/Гу Юнь.jpg"]{
-        height: 45%; 
+        height: 45%;
         width: 45%;
         padding-right: 3%;
     }
     #okno_wolf_l > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
     #okno_wolf_d > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
@@ -83,13 +83,37 @@
         display: inline-block;
         border: 1px solid #2b2211;
         color: #1b1209;
-        padding: 0 12px;    
+        padding: 0 12px;
         margin: 10px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 20px;
         text-decoration: none;
         background: #ebe4d5;
         cursor:pointer;
+    }
+
+    .main{
+        flex-direction: column;
+    }
+    .content_block{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        padding: 25px;
+    }
+    .content_header{
+        font-family: 'Roboto', sans-serif;
+        font-size: 45px;
+        font-weight: bolder;
+    }
+    .block_chapter{
+        align-items: baseline;
+        padding: 12px;
+    }
+    .for_chapters{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 25px;
     }
 }
 @media (min-width:750px) and (max-width: 1023px){
@@ -138,7 +162,7 @@
         left: 0;
         margin: auto;
         background: rgb(17, 17, 17);
-    } 
+    }
     #okno_wolf_d > a{
         position: absolute;
         right: 3%;
@@ -148,27 +172,27 @@
         color: inherit;
     }
     img[src="img/Чан Ген.jpg"]{
-        height: 300px; 
+        height: 300px;
         width: 260px;
-        float: left; 
-        padding-left: 5%; 
+        float: left;
+        padding-left: 5%;
         padding-right: 3%;
     }
     img[src="img/Гу Юнь.jpg"]{
-        height: 300px; 
+        height: 300px;
         width: 260px;
-        float: left; 
+        float: left;
         padding-right: 5%;
     }
     #okno_wolf_l > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
     #okno_wolf_d > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
@@ -178,13 +202,37 @@
         display: inline-block;
         border: 1px solid #2b2211;
         color: #1b1209;
-        padding: 0 12px;    
+        padding: 0 12px;
         margin: 10px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 40px;
         text-decoration: none;
         background: #ebe4d5;
         cursor:pointer;
+    }
+
+    .main{
+        flex-direction: column;
+    }
+    .content_block{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        padding: 25px;
+    }
+    .content_header{
+        font-family: 'Roboto', sans-serif;
+        font-size: 65px;
+        font-weight: bold;
+    }
+    .block_chapter{
+        align-items: baseline;
+        padding: 12px;
+    }
+    .for_chapters{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 30px;
     }
 }
 @media (min-width: 1024px) and (max-width: 2560px){
@@ -233,7 +281,7 @@
         left: 0;
         margin: auto;
         background: rgb(17, 17, 17);
-    } 
+    }
     #okno_wolf_d > a{
         position: absolute;
         right: 3%;
@@ -243,27 +291,27 @@
         color: inherit;
     }
     img[src="img/Чан Ген.jpg"]{
-        height: 300px; 
+        height: 300px;
         width: 260px;
-        float: left; 
-        padding-left: 5%; 
+        float: left;
+        padding-left: 5%;
         padding-right: 3%;
     }
     img[src="img/Гу Юнь.jpg"]{
-        height: 300px; 
+        height: 300px;
         width: 260px;
-        float: left; 
+        float: left;
         padding-right: 5%;
     }
     #okno_wolf_l > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
     #okno_wolf_d > div{
-        padding-right: 3%; 
+        padding-right: 3%;
         padding-left: 7%;
         display: flex;
         flex-direction: row;
@@ -273,7 +321,7 @@
         display: inline-block;
         border: 1px solid #2b2211;
         color: #1b1209;
-        padding: 0 12px;    
+        padding: 0 12px;
         margin: 10px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 40px;
@@ -282,6 +330,9 @@
         cursor:pointer;
     }
 
+    .main{
+        flex-direction: column;
+    }
     .content_block{
         display: flex;
         flex-direction: row;
@@ -295,9 +346,6 @@
         font-weight: bold;
     }
     .block_chapter{
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
         align-items: baseline;
         padding: 12px;
     }

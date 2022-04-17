@@ -1,76 +1,39 @@
-let j = 0;
 function openNav() {
-    if(document.documentElement.clientWidth > 700){
-        if(j == 0){
-            document.getElementById("mySidenav").style.width = "25%";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
-            document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
-            document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            j++;
-        }
-        else if(j == 1){
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("searchIcon").style.backgroundColor = "";
-            document.getElementById("homeIcon").style.backgroundColor = "";
-            j--;
-        }
+    if(document.documentElement.clientWidth > 700 && document.documentElement.clientWidth < 1024){
+        document.getElementById("mySidenav").style.width = "100%";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+        document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.backgroundColor = "rgba(86, 86, 86)";
     }
     else if(document.documentElement.clientWidth <= 700){
-        if(j == 0){
-            document.getElementById("mySidenav").style.width = "45%";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
-            document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
-            document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            j++;
-        }
-        else if(j == 1){
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("searchIcon").style.backgroundColor = "";
-            document.getElementById("homeIcon").style.backgroundColor = "";
-            j--;
-        }
+        document.getElementById("mySidenav").style.width = "100%";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+        document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.backgroundColor = "rgba(86, 86, 86)";
+    }
+    else if(document.documentElement.clientWidth >= 1024){
+        document.getElementById("mySidenav").style.width = "25%";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+        document.getElementById("searchIcon").style.backgroundColor = "#ceba85";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.backgroundColor = "rgba(86, 86, 86)";
     }
 }
- 
 
+function closeNav(){
+    document.getElementById("mySidenav").style.width = "0";
+    document.body.style.backgroundColor = "";
+    document.getElementById("searchIcon").style.backgroundColor = "";
+    document.getElementById("homeIcon").style.backgroundColor = "";
+}
 
-//выпадающее меню
-let i = 0;
-function dropMenu(){
-    if(document.documentElement.clientWidth > 700){
-        if(i == 0){
-            document.getElementById("pageMenu").style.width="9.5%";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
-            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            i++;
-        }
-        else if(i == 1){
-            document.getElementById("pageMenu").style.width = "0";
-            document.body.style.backgroundColor = "#0e0e0e";
-            document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
-            document.getElementById("menuBar").style.backgroundColor = "#ceba85";
-            i--;
-        }
-    }
-    else if(document.documentElement.clientWidth <= 700){
-        if(i == 0){
-            document.getElementById("pageMenu").style.width="19.5%";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
-            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            i++;
-        }
-        else if(i == 1){
-            document.getElementById("pageMenu").style.width = "0";
-            document.body.style.backgroundColor = "#0e0e0e";
-            document.getElementById("menuIcon").style.backgroundColor = "#ceba85";
-            document.getElementById("menuBar").style.backgroundColor = "#ceba85";
-            i--;
-        }
-    }
+function openNavBar() {
+    document.getElementById("pageHeader").style.height = "100%";
 }
 
 function searchOnPage() {

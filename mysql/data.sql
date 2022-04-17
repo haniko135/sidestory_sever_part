@@ -13,7 +13,9 @@ create table novel
     novel_name        varchar(255) null,
     novel_rating      varchar(255) null,
     rating_age        int          null,
-    novelurl         varchar(255) null
+    novelurl         varchar(255) null,
+    constraint UK_e13jg535agtl22krc3633wkv6
+        unique (novelurl)
 );
 
 create table pages
@@ -27,6 +29,35 @@ create table pages
     novel_id          bigint       null,
     constraint FKh0iegkt2jap75mdgl3vru9o6e
         foreign key (novel_id) references novel (id)
+);
+
+create table roles
+(
+    id bigint       not null
+        primary key,
+    name     varchar(255) null
+);
+
+create table t_user
+(
+    id       bigint auto_increment
+        primary key,
+    active   bit          not null,
+    age      int          null,
+    email    varchar(255) null,
+    img      varchar(255) null,
+    password varchar(100) null,
+    sex      varchar(255) null,
+    username varchar(128) null
+);
+
+create table t_roles
+(
+    user_id  bigint not null,
+    roles varchar(255) not null,
+    primary key (user_id),
+    constraint FKsgq4ifnlnxgq6oea4khaeoier
+        foreign key (user_id) references t_user (id)
 );
 
 CREATE TABLE SPRING_SESSION (
@@ -105,3 +136,9 @@ insert into pages value ('38', 'Мэй Чансу', 'Глава 2', '2.1',b'0000
 insert into pages value ('39', 'Мэй Чансу', '', '2.2',b'00000','5');
 insert into pages value ('40', 'Мэй Чансу', 'Глава 3', '3.1',b'00001','5');
 insert into pages value ('41', 'Мэй Чансу', 'Глава 4', '4.1',b'00001','5');
+
+
+insert into t_user (id, active, password, username) value ('1', b'00001', '$2a$10$Iw.pUB5E00zP3VB.ISijKuWfTKbCxAnNTeotPaqjbATh8gsP.AkgO', 'Admin');
+insert into t_roles value ('1', 'ADMIN');
+insert into t_user (id, active, password, username) value ('2', b'00001', '$2a$10$XFCF9gNvd6dwWs.SEkRNp.GWfNFSaT/vGQxoBLt1HG9VAUwnUcAP2', 'editor');
+insert into t_roles value ('2', 'MODERATOR');

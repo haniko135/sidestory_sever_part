@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name="t_user")
@@ -26,11 +27,7 @@ public class Users {
     @NotBlank(message = "Пароль не должен быть пустым")
     private String password;
 
-    private boolean active;
-
-    //@Transient
-    //@NotBlank(message = "Поле подтверждения пароля не должно быть пустым")
-    //private String passwordConfirm;
+    private Boolean active;
 
     private String email;
 

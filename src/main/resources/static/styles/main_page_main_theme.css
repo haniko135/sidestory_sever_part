@@ -3,64 +3,33 @@
     padding: 0;
 }
 @media(min-width: 320px) and (max-width: 749px){
-    body{                                             /*контейнер*/
-        height: 100%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 5% auto;
-        grid-template-rows: 100px auto;
-        grid-template-areas:
-            "header header"
-            "nav main"
-            "footer footer"
-    ;
+    #profileBlock{
+        display:none!important;
     }
-    #pageHeader{                                    /*хедер*/
-        grid-area: header;
-        display: flex;
-    }
-    #menuBar{
-        display: none;
-    }
-    #pageMenu{                                      /*менюшка*/
-        grid-area: nav;
-        padding: 7px;
-        display: flex;
-        flex-direction: column;
-    }
-    #main{                                          /*главная область*/
-        grid-area: main;
-        display: flex;
-        flex-direction: column;
+    #pageMenu1{
+        display: none!important;
     }
     #footer{
-        grid-area: footer;
         padding:7px;
-        display: flex;
     }
     .block_style{
-        padding: 3% 1%;
+        padding: 1% 1%;
     }
     .headerBlock{
         font-family: 'Viaoda Libre', cursive;
-        font-size: 30px;
-        line-height: 1.0;
-        margin-bottom: 0%;
+        font-size: 25px;
     }
     .imgBlock{
-        float: left;
-        margin-right: 2%;
-        width: 150px;
+        width: 50%;
     }
     .infoBlock{
         font-family: 'Roboto', sans-serif;
-        font-size: 18px;
-        margin: 2% 1% 1% 0;
+        font-size: 12px;
     }
     .playButton{
-        margin-right: 2%;
-        margin-left: 85%;
+        width: 100%;
         text-align: center;
+        margin-bottom: 10px;
     }
     .source{
         font-family: 'Roboto', sans-serif;
@@ -69,20 +38,13 @@
     }
     .name_style{
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 4em;
-        text-align: left;
-        flex-basis: 83%;
-        align-self: center;
-        margin-left: 2%;
+        font-size: 2.5em;
+        text-align: center;
     }
     .stylish{
-        display: inline-flex;
-        padding: 10px 0 10px 7px;
-        width: auto;
+        padding: 5px 0 5px 7px;
     }
     .img_profile{
-        align-self: center;
-        float: left;
         margin-right: 5px;
     }
     .span_profile{
@@ -97,7 +59,7 @@
         width: auto;
         position: static;
     }
-    .icon-bar a {
+    .icon-bar > li >a {
         display: block;
         text-align: center;
         padding-top: 20px;
@@ -117,6 +79,12 @@
         position: relative;
         font-family: 'Viaoda Libre', cursive;
         font-weight: bold;
+        padding: 5px 20px;
+    }
+    .krestik{
+        font-size:30px;
+        padding: 5px 15px;
+        cursor: pointer;
     }
     input {
         width: 70%;
@@ -125,7 +93,7 @@
         border-radius: 5px;
         outline: none;
     }
-    button{
+    .search_submit{
         position: relative;
         top: 1px;
         right: 15px;
@@ -135,7 +103,7 @@
         border-radius: 0 5px 5px 0;
         cursor: pointer;
     }
-    button:before {
+    .search_submit:before {
         content: "\f002";
         font-family: FontAwesome;
         font-size: 16px;
@@ -154,7 +122,7 @@
     }
     .footer_info_container{
         display: flex;
-        flex-basis: 50%;
+        flex-basis: 100%;
         align-self: center;
         flex-wrap: wrap;
     }
@@ -224,63 +192,33 @@
     }
 }
 @media (min-width:750px) and (max-width: 1023px){
-    body{                                             /*контейнер*/
-        height: 100%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 5% auto;
-        grid-template-rows: 75px auto;
-        grid-template-areas:
-            "nav header"
-            "main main"
-            "footer footer"
-    ;
-    }
-    #pageHeader{                                    /*хедер*/
-        grid-area: header;
-        display: flex;
-    }
     #menuBar{
-        grid-area: nav;
-        padding: 7px;
+        padding: 15px;
     }
-    #pageMenu{
-        padding: 4px;
-        display: flex;
-        flex-direction: column;
-    }
-    #main{                                          /*главная область*/
-        grid-area: main;
-        display: flex;
-        flex-direction: column;
+    #pageMenu1{
+        display: none!important;
     }
     #footer{
-        grid-area: footer;
-        padding:5px;
-        display: flex;
+        padding:5vh;
     }
     .block_style{
-        padding: 3% 1%;
+        padding: 3vh 1vw;
     }
     .headerBlock{
         font-family: 'Viaoda Libre', cursive;
-        font-size: 28px;
-        line-height: 1.0;
-        margin-bottom: 0%;
+        font-size: 23px;
     }
     .imgBlock{
-        float: left;
-        margin-right: 2%;
-        width: 150px;
+        padding-right: 2vw;
+        width: 23vw;
     }
     .infoBlock{
         font-family: 'Roboto', sans-serif;
-        font-size: 17px;
-        margin: 2% 1% 1% 0;
+        font-size: 15px;
+        margin: 2vh 1vw 1vh 0;
     }
     .playButton{
-        margin-right: 2%;
-        margin-left: 85%;
+        padding: 0px 7px;
         text-align: center;
     }
     .source{
@@ -290,42 +228,31 @@
     }
     .name_style{
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 4em;
+        font-size: 3em;
         text-align: left;
         flex-basis: 83%;
         align-self: center;
         margin-left: 2%;
     }
     .stylish{
-        display: inline-flex;
-        padding: 10px 0 10px 7px;
-        width: auto;
+        padding: 2vh 0 2vh 3vw;
     }
     .img_profile{
-        align-self: center;
-        float: left;
-        margin-right: 5px;
+        padding: 3px;
     }
     .span_profile{
-        font-size: 25px;
+        font-size: 20px;
         text-decoration: none;
         font-family: 'Viaoda Libre', cursive;
     }
-    .span_block{
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-    }
     .span_block_p{
-        padding: 5px 7px;
-        margin-left: 12px;
-        margin-right: 12px;
+        padding: 3px 5px;
     }
     .icon-bar {
         width: auto;
         position: static;
     }
-    .icon-bar a {
+    .icon-bar > li >a {
         display: block;
         text-align: center;
         padding-top: 20px;
@@ -345,6 +272,12 @@
         position: relative;
         font-family: 'Viaoda Libre', cursive;
         font-weight: bold;
+        padding: 10px 40px;
+    }
+    .krestik{
+        font-size:38px;
+        padding: 10px 25px;
+        cursor: pointer;
     }
     input {
         width: 70%;
@@ -353,7 +286,7 @@
         border-radius: 5px;
         outline: none;
     }
-    button{
+    .search_submit{
         position: relative;
         top: 1px;
         right: 15px;
@@ -363,7 +296,7 @@
         border-radius: 0 5px 5px 0;
         cursor: pointer;
     }
-    button:before {
+    .search_submit:before {
         content: "\f002";
         font-family: FontAwesome;
         font-size: 16px;
@@ -452,35 +385,11 @@
     }
 }
 @media (min-width: 1024px) and (max-width: 2560px){
-    body{                                             /*контейнер*/
-        height: 100%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 5% auto;
-        grid-template-rows: 100px auto;
-        grid-template-areas: 
-            "header header"
-            "nav main"
-            "footer footer"
-        ;
-    }
-    #pageHeader{                                    /*хедер*/
-        grid-area: header;
-        display: flex;
-    }
     #menuBar{
         display: none;
     }
-    #pageMenu{                                      /*менюшка*/
-        grid-area: nav;
+    #pageMenu{
         padding: 7px;
-        display: flex;
-        flex-direction: column;
-    }
-    #main{                                          /*главная область*/
-        grid-area: main;
-        display: flex;
-        flex-direction: column;
     }
     #footer{
         grid-area: footer;
@@ -488,76 +397,58 @@
         display: flex;
     }
     .block_style{
-        padding: 3% 1%;
+        padding: 1vh 2vw;
     }
     .headerBlock{
         font-family: 'Viaoda Libre', cursive;
         font-size: 30px;
-        line-height: 1.0;
-        margin-bottom: 0%;
     }
     .imgBlock{
-        float: left;
-        margin-right: 2%;
-        width: 150px;
+        margin-right: 2vw;
+        width: 20vw;
     }
     .infoBlock{
         font-family: 'Roboto', sans-serif;
         font-size: 18px;
-        margin: 2% 1% 1% 0;
+        margin: 2vh 1vw 1vh 0;
     }
-    .playButton{                                         
-        margin-right: 2%;
-        margin-left: 85%;
+    .playButton{
+        padding: 0 5vw;
+        margin: 0 15px;
         text-align: center;
     }
-    .source{                                             
+    .source{
         font-family: 'Roboto', sans-serif;
-        font-size: 25px;
+        font-size: 30px;
         text-decoration: none;
     }
     .name_style{
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 4em;
+        font-size: 3em;
         text-align: left;
         flex-basis: 83%;
         align-self: center;
         margin-left: 2%;
     }
-    .stylish{
-        display: inline-flex;
-        padding: 10px 0 10px 7px;
-        width: auto;
-    }
     .img_profile{
-        align-self: center;
-        float: left;
-        margin-right: 5px;
+        padding: 5px;
     }
     .span_profile{
         font-size: 20px;
         text-decoration: none;
         font-family: 'Viaoda Libre', cursive;
     }
-    .span_block{
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-    }
     .span_block_p{
-        padding: 5px 12px;
-        margin-left: 12px;
-        margin-right: 12px;
+        padding: 5px;
     }
     .icon-bar {
-        width: auto; 
+        width: auto;
         position: static;
     }
     .icon-bar a {
         display: block;
         text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding: 5vh 1vw;
         font-size: 40px;
     }
     #menuSearch li a{
@@ -568,11 +459,16 @@
         display: block
     }
     .search_p{
-        font-size: 30px;
+        font-size: 40px;
         text-align: center;
         position: relative;
         font-family: 'Viaoda Libre', cursive;
         font-weight: bold;
+    }
+    .krestik{
+        font-size:42px;
+        padding: 20px 45px;
+        cursor: pointer;
     }
     input {
         width: 70%;
@@ -581,8 +477,8 @@
         border-radius: 5px;
         outline: none;
     }
-    button{
-        position: relative; 
+    .search_submit{
+        position: relative;
         top: 1px;
         right: 15px;
         width: 29px;
@@ -591,7 +487,7 @@
         border-radius: 0 5px 5px 0;
         cursor: pointer;
     }
-    button:before {
+    .search_submit:before {
         content: "\f002";
         font-family: FontAwesome;
         font-size: 16px;
@@ -621,16 +517,11 @@
         margin: 2%;
     }
     .mini_map{
-        justify-content: flex-start;
-        display: flex;
-    }
-    .mini_map p{
         margin: 15px;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
     }
     .donate{
-        padding: 10px;
         align-self: center;
         font-family: 'Roboto', sans-serif;
         font-size: 20px;
@@ -660,18 +551,18 @@
         color: inherit;
     }
     .img-in-block{
-        height:207px; 
+        height:207px;
         width: 195px;
-        float: left; 
+        float: left;
         padding-left: 25px;
     }
     .choice-in-block{
-        margin-left: 200px; 
+        margin-left: 200px;
         margin-top: 50px;
     }
     .close{
         display: inline-block;
-        padding: 0 12px;    
+        padding: 0 12px;
         margin: 10px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 40px;
@@ -700,4 +591,14 @@ form {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+a{
+    text-decoration: none!important;
+}
+.overlay-content{
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px;
 }

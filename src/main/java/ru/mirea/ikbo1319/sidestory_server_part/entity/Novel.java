@@ -13,7 +13,6 @@ import java.util.Set;
 public class Novel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "novelName")
@@ -41,7 +40,7 @@ public class Novel {
     @Column(name = "novelImg")
     private String novelImg;
 
-    @Column(name = "novelURL")
+    @Column(name = "novelURL", unique = true)
     private String novelURL;
 
     public Novel() {

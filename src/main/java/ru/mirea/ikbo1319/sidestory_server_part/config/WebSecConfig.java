@@ -1,27 +1,18 @@
 package ru.mirea.ikbo1319.sidestory_server_part.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.jdbc.JdbcIndexedSessionRepository;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
-import org.springframework.session.security.SpringSessionBackedSessionRegistry;
-
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @Configuration
@@ -45,7 +36,6 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
         return new MyAccessDeniedHandler();
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable().csrf().disable()
@@ -57,6 +47,10 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/profile?*", "game_pages/**/**/**", "/addNovelToProfile?**",
                         "/hadReadNovelToProfile?**", "/deleteHadReadNovel?**", "/deleteNowReadNovel?**")
                         .hasRole("USER")
+                .and()
+                    .authorizeRequests()
+                        .antMatchers( "/admin?**", "/addNovel?**", "/deleteNovel?**","/addPage?**", "/deletePage?**")
+                        .hasAnyRole("ADMIN", "MODERATOR")
                 .and()
                     .formLogin()
                         .loginPage("/login")
@@ -83,4 +77,6 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select username, password, active from t_user where username=?")
                 .authoritiesByUsernameQuery("select u.username, ur.roles from t_user u inner join t_roles ur on u.id = ur.user_id where u.username=?");
     }
+
+
 }

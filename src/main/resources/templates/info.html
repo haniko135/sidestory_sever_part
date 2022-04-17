@@ -14,7 +14,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
         <!--Google Fonts Roboto для основного текста-->
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-        
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title th:text="${novel.getNovelName()}"></title>
@@ -22,118 +24,180 @@
         <script th:if="${theme.equals('styles/main_page_light.css')}" src="/js/info_pages_script_light.js"></script>
     </head>
     <body class="background">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
-        <header id="pageHeader">
-            <a name="main_anchor"></a>
-            <p class="name_style">SideStory</p>
-            <div class="stylish">
-                <div class="img_profile">
-                    <img sec:authorize="isAnonymous()" src="/img/profile.jpg" width="70px">
-                    <p sec:authorize="isAuthenticated()">
-                        <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}" width="70px" height="70px">
-                        <img th:unless="${users.getImg()}" src="/img/profile.jpg" width="70px">
-                    </p>
+        <div class="container-fluid">
+            <a name="home_anchor"></a>
+            <nav class="row justify-content-evenly navbar navbar-expand-xxl sticky-top" id="pageHeader">
+                <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar">
+                    <span class="navbar-toggler-icon" id="menuIcon"><i class="fa fa-bars"></i></span>
+                </button>
+                <div >
+                    <a class="navbar-brand" href="#home_anchor"><p class="name_style">SideStory</p></a>
                 </div>
-                <div class="span_block">
-                    <p class="span_block_p" sec:authorize="isAnonymous()">
-                        <a class="span_profile" href="/login">Войдите</a>
-                    </p>
-                    <p class="span_block_p" sec:authorize="isAuthenticated()">
-                        <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
-                    </p>
-                    <p class="span_block_p"  sec:authorize="isAuthenticated()">
-                        <a class="span_profile" th:href="@{/logout}">Выйти</a>
-                    </p>
-                </div>
-            </div>
-        </header>
-
-        <div id="menuBar">
-            <div class="icon-bar">
-                <a href="#main_anchor" class="active" onclick="dropMenu()" id="menuIcon"><i class="fa fa-bars"></i></a>
-            </div>
-        </div>
-
-            <div id="pageMenu">
-                    <div class="icon-bar">
-                        <a href="/main">
-                            <i class="fa fa-home"></i>
-                        </a>
-                        <a href="#main_anchor" onclick="openNav()" id="searchIcon">
-                            <i class="fa fa-search"></i>
-                        </a>
-                        <a href="/instruction">
-                            <i class="fa fa-question"></i>
-                        </a>
-                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=dark'}">
-                            <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
-                        </a>
-                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=light'}">
-                            <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
-                        </a>
-                        <a th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                        <a th:href="@{/hadReadNovelToProfile(novelURL=${novel.getNovelURL()})}"><i class="fa fa-check"></i></a>
+                <div class="col-lg-2 col-md-3 d-flex stylish justify-content-around" id="profileBlock">
+                    <div class="row align-content-center img_profile">
+                        <img sec:authorize="isAnonymous()" src="/img/profile.jpg" width="70px">
+                        <p sec:authorize="isAuthenticated()">
+                            <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}" width="70px" height="70px">
+                            <img th:unless="${users.getImg()}" src="/img/profile.jpg" width="70px">
+                        </p>
                     </div>
-            </div>
-
-            <div id="mySidenav" class="sidenav">
-                <p class="search_p">Поиск</p>
-                <form>
-                    <input type="search" placeholder="Введите искомое здесь..." id="textToFind" onkeyup="searchOnPage()">
-                    <button type="submit"></button>
-                </form>
-                <ul id="menuSearch" th:each="novel:${novelsAll}">
-                    <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
-                </ul>
-            </div>
-
-        <a id="sorry" onload="createInfoBlocks('Приносим свои извинения! Эта новелла ещё не готова. Оставайтесь с нами!', '../img/age.jpg', '#sorry' , '#home_anchor')"></a>
-        <div id="main" >
-            <div class="block_style">
-                <img th:src="@{'/img/' + ${novel.getNovelImg()}}" class="front">
-                <h1 class="h3_info"><b th:text="${novel.getNovelName()}"></b></h1>
-                <p class="p_info" th:text="${novel.getNovelDescription()}"></p>
-                <br><br>
-                <div class="p_info"><b class="attention">Рейтинг:</b><span th:text="${novel.getNovelRating()}"></span></div>
-                <div class="p_info"><b class="attention">Жанры:</b><span th:text="${novel.getNovelGenre()}"></span></div>
-                <div class="p_info"><b class="attention">Aвтор:</b><span th:text="${novel.getNovelAuthor()}"></span></div>
-                <div class="p_info"><b class="attention">Предупреждения:</b><span th:text="${novel.getNovelAttention()}"></span></div>
-                <div class="p_info"><b class="attention">Возрастное ограничение:</b><span th:text="${novel.getRatingAge()}"></span>+</div>
-
-                <div class="bottom">
-                    <div class="button_style_info">
-                        <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
-                        <a class="source_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">ИГРАТЬ</a>
+                    <div class="row d-flex align-items-center flex-md-column flex-lg-column">
+                        <p class="span_block_p" sec:authorize="isAnonymous()">
+                            <a class="span_profile" href="/login">Войдите</a>
+                        </p>
+                        <p class="span_block_p" sec:authorize="isAuthenticated()">
+                        <div sec:authorize="hasAnyAuthority('USER')">
+                            <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                        </div>
+                        <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                            <a class="span_profile" href="/admin">Консоль БД</a>
+                        </div>
+                        </p>
+                        <p class="span_block_p" sec:authorize="isAuthenticated()">
+                            <a class="span_profile" th:href="@{/logout}" >Выйти</a>
+                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="footer">
-            <div class="footer_info_container">
-                <p class="footer_name_style">
-                    SideStory
-                </p>
-                <div class="mini_map">
-                    <p><a href="/main">Главная</a></p>
-                    <p><a href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
-                    <p><a href="/instruction">Помощь в игре</a></p>
-                    <p>
-                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info&nameTheme=dark'}">
-                            Светлая тема
-                        </a>
-                    </p>
-                    <p>
-                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info&nameTheme=light'}">
-                            Темная тема
-                        </a>
-                    </p>
+                <div class="collapse navbar-collapse overlay-content" id="pageMenu">
+                    <ul class="navbar-nav icon-bar">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/main" id="homeIcon">
+                                <i class="fa fa-home" data-tooltip="Домой"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home_anchor" onclick="openNav()" id="searchIcon">
+                                <i class="fa fa-search" data-tooltip="Поиск"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/instruction">
+                                <i class="fa fa-question" data-tooltip="Помощь"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=main&nameTheme=dark'}">
+                                <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=main&nameTheme=light'}">
+                                <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">
+                                <i class="fa fa-user" data-tooltip="Юзер"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-sm-1-2 position" id="pageMenu1">
+                    <ul class="icon-bar">
+                        <li>
+                            <a href="/main">
+                                <i class="fa fa-home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#main_anchor" onclick="openNav()" id="searchIcon">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/instruction">
+                                <i class="fa fa-question"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=dark'}">
+                                <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=light'}">
+                                <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/hadReadNovelToProfile(novelURL=${novel.getNovelURL()})}"><i class="fa fa-check"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col d-flex" id="main">
+                    <div class="row align-items-md-center block_style">
+                        <div>
+                            <img th:src="@{'/img/' + ${novel.getNovelImg()}}" class="front">
+                            <h1 class="h3_info"><b th:text="${novel.getNovelName()}"></b></h1>
+                            <p class="p_info" th:text="${novel.getNovelDescription()}"></p>
+                        </div>
+                        <br><br>
+                        <div class="justify-content-start genres-bottom">
+                            <div class="p_info"><b class="attention">Рейтинг:</b><span th:text="${novel.getNovelRating()}"></span></div>
+                            <div class="p_info"><b class="attention">Жанры:</b><span th:text="${novel.getNovelGenre()}"></span></div>
+                            <div class="p_info"><b class="attention">Aвтор:</b><span th:text="${novel.getNovelAuthor()}"></span></div>
+                            <div class="p_info"><b class="attention">Предупреждения:</b><span th:text="${novel.getNovelAttention()}"></span></div>
+                            <div class="p_info"><b class="attention">Возрастное ограничение:</b><span th:text="${novel.getRatingAge()}"></span>+</div>
+
+                            <div class="bottom d-flex justify-content-center">
+                                <div class="button_style_info">
+                                    <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
+                                    <a class="source_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">ИГРАТЬ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="donate">
-                Админу на печеньки: +7(985)380-27-17
+            <div class="row d-flex" id="footer">
+                <div class="footer_info_container">
+                    <a href="#home_anchor">
+                        <p class="footer_name_style">
+                            SideStory
+                        </p>
+                    </a>
+                    <div class="col d-flex flex-row align-items-center justify-content-around">
+                        <p><a class="mini_map" href="/main">Главная</a></p>
+                        <p><a class="mini_map" href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
+                        <p><a class="mini_map" href="/instruction">Помощь в игре</a></p>
+                        <p>
+                            <a class="mini_map" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info&nameTheme=dark'}">
+                                Светлая тема
+                            </a>
+                        </p>
+                        <p>
+                            <a class="mini_map" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info&nameTheme=light'}">
+                                Темная тема
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="donate">
+                    Админу на печеньки: +7(985)380-27-17
+                </div>
             </div>
         </div>
+
+        <div id="mySidenav" class="sidenav">
+            <p class="search_p">Поиск</p>
+            <form>
+                <input type="search" placeholder="Введите искомое здесь..." id="textToFind" onkeyup="searchOnPage()">
+                <button type="submit"></button>
+            </form>
+            <ul id="menuSearch" th:each="novel:${novelsAll}">
+                <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
+            </ul>
+        </div>
+            <!--<a id="sorry" onload="createInfoBlocks('Приносим свои извинения! Эта новелла ещё не готова. Оставайтесь с нами!', '../img/age.jpg', '#sorry' , '#home_anchor')"></a>-->
     </body>
 </html>

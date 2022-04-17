@@ -38,10 +38,15 @@
                         <a class="span_profile" href="/login">Войдите</a>
                     </p>
                     <p class="span_block_p" sec:authorize="isAuthenticated()">
+                    <div sec:authorize="hasAnyAuthority('USER')">
                         <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                    </div>
+                    <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                        <a class="span_profile" href="/admin">Консоль БД</a>
+                    </div>
                     </p>
-                    <p class="span_block_p"  sec:authorize="isAuthenticated()">
-                        <a class="span_profile" th:href="@{/logout}">Выйти</a>
+                    <p class="span_block_p" sec:authorize="isAuthenticated()">
+                        <a class="span_profile" th:href="@{/logout}" >Выйти</a>
                     </p>
                 </div>
             </div>
@@ -87,8 +92,8 @@
                 </div>
                 <div class="block_chapter" th:each="chapter:${chapters}">
                     <p class="for_chapters">
-                        <a style="display: none" class="ch_href" th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}"></a>
-                        <a href="#" class="an_href" th:text="${chapter.getNameSource()}"></a>
+                        <a style="display: none" class="ch_href" ></a>
+                        <a th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}" th:text="${chapter.getNameSource()}"></a>
                     </p>
                 </div>
 

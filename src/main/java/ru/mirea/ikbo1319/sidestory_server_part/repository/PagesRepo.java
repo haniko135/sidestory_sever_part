@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface PagesRepo extends CrudRepository<Pages, Long> {
     ArrayList<Pages> findAllByNovel_IdAndAndStartSourceIsTrue(Long novelId);
     Pages findAllByNovel_NovelURLAndCurrentCharacterAndSource(String url, String currCh, String source);
+    Pages findAllById(Long pageId);
 }

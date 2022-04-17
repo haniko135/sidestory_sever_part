@@ -1,0 +1,47 @@
+table{
+    margin: 5px 10px;
+    border: 1px solid #3f2f09;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+td, th{
+    border-bottom: 1px solid #3f2f09;
+    border-left: 1px solid #3f2f09;
+    margin: 0;
+    padding: 5px;
+    width: 25%;
+}
+.span_p{
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 10px;
+    caption-side: top;
+}
+a > .button_admin{
+    display: block;
+}
+.button_admin{
+    width: 50px;
+    height: 50px;
+    font-size: 15px;
+}
+.button_admin:hover{
+    background-color: #887d62;
+}
+button:before {
+    content: "" !important;
+    font-family: FontAwesome;
+    font-size: 16px;
+}
+button{
+    position: relative;
+    top: 0px !important;
+    right: 0px !important;
+    width: 50px !important;
+    height: 50px !important;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
