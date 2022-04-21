@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <a name="home_anchor"></a>
             <nav class="row justify-content-evenly navbar navbar-expand-xxl sticky-top" id="pageHeader">
-                <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar">
+                <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar" onclick="openNavBar()">
                     <span class="navbar-toggler-icon" id="menuIcon"><i class="fa fa-bars"></i></span>
                 </button>
                 <div >
@@ -38,10 +38,10 @@
                 </div>
                 <div class="col-lg-2 col-md-3 d-flex stylish justify-content-around" id="profileBlock">
                     <div class="row align-content-center img_profile">
-                        <img sec:authorize="isAnonymous()" src="/img/profile.jpg" width="70px">
+                        <img sec:authorize="isAnonymous()" src="/img/profile.jpg">
                         <p sec:authorize="isAuthenticated()">
-                            <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}" width="70px" height="70px">
-                            <img th:unless="${users.getImg()}" src="/img/profile.jpg" width="70px">
+                            <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}">
+                            <img th:unless="${users.getImg()}" src="/img/profile.jpg">
                         </p>
                     </div>
                     <div class="row d-flex align-items-center flex-md-column flex-lg-column">
@@ -49,12 +49,12 @@
                             <a class="span_profile" href="/login">Войдите</a>
                         </p>
                         <p class="span_block_p" sec:authorize="isAuthenticated()">
-                        <div sec:authorize="hasAnyAuthority('USER')">
-                            <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
-                        </div>
-                        <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
-                            <a class="span_profile" href="/admin">Консоль БД</a>
-                        </div>
+                            <div sec:authorize="hasAnyAuthority('USER')">
+                                <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                                <a class="span_profile" href="/admin">Консоль БД</a>
+                            </div>
                         </p>
                         <p class="span_block_p" sec:authorize="isAuthenticated()">
                             <a class="span_profile" th:href="@{/logout}" >Выйти</a>
@@ -79,16 +79,28 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=main&nameTheme=dark'}">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=dark'}">
                                 <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=main&nameTheme=light'}">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=light'}">
                                 <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAnyAuthority('USER')">
+                                <a class="nav-link" href="/profile">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                                <a class="nav-link" href="/admin">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAnonymous()">
                             <a class="nav-link" href="/login">
                                 <i class="fa fa-user" data-tooltip="Юзер"></i>
                             </a>
@@ -149,11 +161,22 @@
                             <div class="p_info"><b class="attention">Предупреждения:</b><span th:text="${novel.getNovelAttention()}"></span></div>
                             <div class="p_info"><b class="attention">Возрастное ограничение:</b><span th:text="${novel.getRatingAge()}"></span>+</div>
 
-                            <div class="bottom d-flex justify-content-center">
-                                <div class="button_style_info">
-                                    <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
-                                    <a class="source_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">ИГРАТЬ</a>
+                            <div id="addBlock">
+                                <div class="d-flex col-12">
+                                    <a class="button_add p-3 m-3" th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}">
+                                        <div class="button_add_info">Читаю сейчас</div>
+                                    </a>
+                                    <a class="button_add p-3 m-3" th:href="@{/hadReadNovelToProfile(novelURL=${novel.getNovelURL()})}">
+                                        <div class="button_add_info">Прочитано</div>
+                                    </a>
                                 </div>
+                            </div>
+
+                            <div class="bottom d-flex justify-content-center">
+                                <a class="button_style_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">
+                                    <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
+                                    <div class="source_info" >ИГРАТЬ</div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -171,12 +194,12 @@
                         <p><a class="mini_map" href="#home_anchor" onclick="openNav()" id="searchIcon">Поиск</a></p>
                         <p><a class="mini_map" href="/instruction">Помощь в игре</a></p>
                         <p>
-                            <a class="mini_map" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info&nameTheme=dark'}">
+                            <a class="mini_map" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=dark'}">
                                 Светлая тема
                             </a>
                         </p>
                         <p>
-                            <a class="mini_map" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info&nameTheme=light'}">
+                            <a class="mini_map" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=info?novelURL='+${novel.getNovelURL()}+'&nameTheme=light'}">
                                 Темная тема
                             </a>
                         </p>
@@ -189,10 +212,13 @@
         </div>
 
         <div id="mySidenav" class="sidenav">
-            <p class="search_p">Поиск</p>
+            <div class="d-flex">
+                <p class="krestik" onclick="closeNav()">X</p>
+                <p class="search_p">Поиск</p>
+            </div>
             <form>
                 <input type="search" placeholder="Введите искомое здесь..." id="textToFind" onkeyup="searchOnPage()">
-                <button type="submit"></button>
+                <button class="search_submit" type="submit"></button>
             </form>
             <ul id="menuSearch" th:each="novel:${novelsAll}">
                 <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>

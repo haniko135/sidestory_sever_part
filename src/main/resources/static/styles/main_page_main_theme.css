@@ -59,7 +59,7 @@
         width: auto;
         position: static;
     }
-    .icon-bar > li >a {
+    .icon-bar > li >a, .icon-bar > li > div >a {
         display: block;
         text-align: center;
         padding-top: 20px;
@@ -240,6 +240,14 @@
     .img_profile{
         padding: 3px;
     }
+    .img_profile > img{
+        width:10vw;
+        height: 10vh;
+    }
+    .img_profile >p>img{
+        width:10vw;
+        height: 15vh;
+    }
     .span_profile{
         font-size: 20px;
         text-decoration: none;
@@ -252,7 +260,7 @@
         width: auto;
         position: static;
     }
-    .icon-bar > li >a {
+    .icon-bar > li >a, .icon-bar > li > div >a {
         display: block;
         text-align: center;
         padding-top: 20px;
@@ -432,6 +440,14 @@
     }
     .img_profile{
         padding: 5px;
+    }
+    .img_profile > img{
+        width:7vw;
+        height:15vh;
+    }
+    .img_profile >p>img{
+        width:7vw;
+        height:15vh;
     }
     .span_profile{
         font-size: 20px;

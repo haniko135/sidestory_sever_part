@@ -55,16 +55,6 @@
                                 <i class="fa fa-question" data-tooltip="Помощь"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=main&nameTheme=dark'}">
-                                <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=main&nameTheme=light'}">
-                                <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
-                            </a>
-                        </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="/login">
                                 <i class="fa fa-user" data-tooltip="Юзер"></i>

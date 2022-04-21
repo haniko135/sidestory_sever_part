@@ -36,10 +36,10 @@
                 </div>
                 <div class="col-lg-2 col-md-3 d-flex stylish justify-content-around" id="profileBlock">
                     <div class="row align-content-center img_profile">
-                        <img sec:authorize="isAnonymous()" src="/img/profile.jpg" width="70px">'
+                        <img sec:authorize="isAnonymous()" src="/img/profile.jpg">
                         <p sec:authorize="isAuthenticated()">
-                            <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}" width="70px" height="70px">
-                            <img th:unless="${users.getImg()}" src="/img/profile.jpg" width="70px">
+                            <img th:if="${users.getImg()}" th:src="@{'/usersImages/'+${users.getImg()}}">
+                            <img th:unless="${users.getImg()}" src="/img/profile.jpg">
                         </p>
                     </div>
                     <div class="row d-flex align-items-center flex-md-column flex-lg-column">
@@ -86,7 +86,19 @@
                                 <i class="fa fa-adjust" data-tooltip="Светлая тема тема"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAnyAuthority('USER')">
+                                <a class="nav-link" href="/profile">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                                <a class="nav-link" href="/admin">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAnonymous()">
                             <a class="nav-link" href="/login">
                                 <i class="fa fa-user" data-tooltip="Юзер"></i>
                             </a>
@@ -170,10 +182,13 @@
             </div>
 
             <div id="mySidenav" class="sidenav">
-                <p class="search_p">Поиск</p>
+                <div class="d-flex">
+                    <p class="krestik" onclick="closeNav()">X</p>
+                    <p class="search_p">Поиск</p>
+                </div>
                 <form>
                     <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
-                    <button type="submit" title="submit"></button>
+                    <button class="search_submit" type="submit" title="submit"></button>
                 </form>
                 <ul id="menuSearch" th:each="novel:${novels}">
                     <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>

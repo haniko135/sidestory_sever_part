@@ -1,71 +1,37 @@
-let j = 0;
 function openNav() {
-    if(document.documentElement.clientWidth > 700){
-        if(j == 0){
-            document.getElementById("mySidenav").style.width = "25%";
-            document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-            document.getElementById("searchIcon").style.backgroundColor = "#857154";
-            j++;
-        }
-        else if(j == 1){
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("searchIcon").style.backgroundColor = "";
-            document.getElementById("homeIcon").style.backgroundColor = "";
-            j--;
-        }
+    if(document.documentElement.clientWidth > 700 && document.documentElement.clientWidth < 1024){
+        document.getElementById("mySidenav").style.width = "100%";
+        document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(157, 157, 157, 0.9)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.background="rgba(157,157,157)";
     }
     else if(document.documentElement.clientWidth <= 700){
-        if(j == 0){
-            document.getElementById("mySidenav").style.width = "45%";
-            document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-            document.getElementById("searchIcon").style.backgroundColor = "#857154";
-            j++;
-        }
-        else if(j == 1){
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("searchIcon").style.backgroundColor = "";
-            document.getElementById("homeIcon").style.backgroundColor = "";
-            j--;
-        }
+        document.getElementById("mySidenav").style.width = "100%";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(157, 157, 157, 0.9)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.background="rgba(157,157,157)";
+    }
+    else if(document.documentElement.clientWidth >= 1024){
+        document.getElementById("mySidenav").style.width = "25%";
+        document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
+        document.getElementById("homeIcon").style.backgroundColor = "rgba(157, 157, 157, 0.9)";
+        document.getElementById("mySidenav").style.zIndex="1030";
+        document.getElementById("mySidenav").style.background="rgba(157,157,157)";
     }
 }
 
-let i = 0;
-function dropMenu(){
-    if(document.documentElement.clientWidth > 700){
-        if(i == 0){
-            document.getElementById("pageMenu").style.width="9.5%";
-            document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            i++;
-        }
-        else if(i == 1){
-            document.getElementById("pageMenu").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("menuIcon").style.backgroundColor = "";
-            document.getElementById("menuBar").style.backgroundColor = "";
-            i--;
-        }
-    }
-    else if(document.documentElement.clientWidth <= 700){
-        if(i == 0){
-            document.getElementById("pageMenu").style.width="19.5%";
-            document.body.style.backgroundColor = "rgba(157,157,157,0.7)";
-            document.getElementById("menuIcon").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            document.getElementById("menuBar").style.backgroundColor = "rgba(86, 86, 86, 0.01)";
-            i++;
-        }
-        else if(i == 1){
-            document.getElementById("pageMenu").style.width = "0";
-            document.body.style.backgroundColor = "";
-            document.getElementById("menuIcon").style.backgroundColor = "";
-            document.getElementById("menuBar").style.backgroundColor = "";
-            i--;
-        }
-    }
+function closeNav(){
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("searchIcon").style.backgroundColor = "";
+    document.getElementById("homeIcon").style.backgroundColor = "";
+    document.getElementById("menuIcon").style.backgroundColor = "";
+    document.body.style.backgroundColor = "";
+}
+
+
+function openNavBar() {
+    document.getElementById("pageHeader").style.height = "100%";
 }
   
 

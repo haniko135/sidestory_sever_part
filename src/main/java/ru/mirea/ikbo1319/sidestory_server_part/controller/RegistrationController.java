@@ -112,8 +112,8 @@ public class RegistrationController{
     }
 
     @PostMapping("/gender")
-    public String addGender(String sex, Integer age, String email){
-        Users users = usersRepo.findAllByActiveIsTrue();
+    public String addGender(@RequestParam("username") String username, String sex, Integer age, String email){
+        Users users = usersRepo.findByUsername(username);
         if(sex != null){ users.setSex(sex); }
         if(age != null){ users.setAge(age); }
         if(email != null) { users.setEmail(email);}

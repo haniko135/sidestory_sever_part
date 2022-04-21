@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <a name="home_anchor"></a>
             <nav class="row justify-content-evenly navbar navbar-expand-xxl sticky-top" id="pageHeader">
-                <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar">
+                <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar" onclick="openNavBar()">
                     <span class="navbar-toggler-icon" id="menuIcon"><i class="fa fa-bars"></i></span>
                 </button>
                 <div>
@@ -67,16 +67,28 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=main&nameTheme=dark'}">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=profile&nameTheme=dark'}">
                                 <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=main&nameTheme=light'}">
+                            <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=profile&nameTheme=light'}">
                                 <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
                             </a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAnyAuthority('USER')">
+                                <a class="nav-link" href="/profile">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                                <a class="nav-link" href="/admin">
+                                    <i class="fa fa-user" data-tooltip="Юзер"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAnonymous()">
                             <a class="nav-link" href="/login">
                                 <i class="fa fa-user" data-tooltip="Юзер"></i>
                             </a>
@@ -114,7 +126,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-xl-9 col-lg-10 col-sm-12 d-flex flex-lg-wrap flex-md-wrap flex-sm-wrap flex-wrap b-3 ml-lg-3" id="main">
+                <div class="col-xl-11 col-lg-10 col-sm-12 d-flex flex-lg-wrap flex-md-wrap flex-sm-wrap flex-wrap b-3 ml-lg-3" id="main">
                     <div class="d-flex col main_info">
                         <div class="d-flex row justify-content-center profile_img">
                             <img th:if="${user.getImg()}" th:src="@{'/usersImages/'+${user.getImg()}}"><br>
@@ -126,15 +138,17 @@
                         </div>
                         <div class="d-flex justify-content-around text_info">
                             <p class="profile_username" th:text="${user.getUsername()}"></p>
-                            <form th:action="@{/gender}" class="d-flex profile_checkboks" method="post">
-                                <div class="d-flex row p-3">
+                            <form th:action="@{'/gender?username='+${user.getUsername}}" class="d-flex profile_checkboks" method="post">
+                                <div class="d-flex p-3 profile_sex">
                                     <p class="profile_name"><b>Пол:</b> <span th:if="${user.getSex()}" th:text="${user.getSex()}"></span></p>
-                                    <label>Мужской
-                                        <input class="profile_sex" type="radio" name="sex" value="Мужской">
-                                    </label>
-                                    <label>Женский
-                                        <input class="profile_sex" type="radio" name="sex" value="Женский">
-                                    </label>
+                                    <div class="d-flex">
+                                        <label>Мужской
+                                            <input type="radio" name="sex" value="Мужской">
+                                        </label>
+                                        <label>Женский
+                                            <input type="radio" name="sex" value="Женский">
+                                        </label>
+                                    </div>
                                 </div>
                                 <p class="profile_name"><b>Возраст:</b>
                                     <span th:if="${user.getAge()}" th:text="${user.getAge()}"></span>
@@ -146,6 +160,7 @@
                                 </p>
                                 <input type="submit" class="submit_button" value="Отправить"></button>
                             </form>
+                            <a id="exitButton" class="btn btn-danger" href="/logout">Выйти</a>
                         </div>
                     </div>
                     <div class="d-flex col justify-content-between novels_list">
@@ -215,10 +230,13 @@
             </div>
         </div>
         <div id="mySidenav" class="sidenav">
-            <p class="search_p">Поиск</p>
+            <div class="d-flex">
+                <p class="krestik" onclick="closeNav()">X</p>
+                <p class="search_p">Поиск</p>
+            </div>
             <form>
                 <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
-                <button type="submit" title="submit"></button>
+                <button class="search_submit" title="submit"></button>
             </form>
             <ul id="menuSearch" th:each="novel:${novelsAll}">
                 <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
