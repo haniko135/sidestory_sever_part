@@ -122,7 +122,7 @@ public class RegistrationController{
         return "redirect:/profile";
     }
 
-    @RequestMapping("/addNovelToProfile")
+    @RequestMapping("/nowReadNovelToProfile")
     public String addNovelToProfile(@RequestParam("novelURL") String novelURL){
         Novel novel = novelRepo.findAllByNovelURL(novelURL);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

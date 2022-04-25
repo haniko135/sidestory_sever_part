@@ -137,7 +137,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
+                            <a th:href="@{/nowReadNovelToProfile(novelURL=${novel.getNovelURL()})}" style="margin-top: 60px">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </li>
@@ -163,7 +163,7 @@
 
                             <div id="addBlock">
                                 <div class="d-flex col-12">
-                                    <a class="button_add p-3 m-3" th:href="@{/addNovelToProfile(novelURL=${novel.getNovelURL()})}">
+                                    <a class="button_add p-3 m-3" th:href="@{/nowReadNovelToProfile(novelURL=${novel.getNovelURL()})}">
                                         <div class="button_add_info">Читаю сейчас</div>
                                     </a>
                                     <a class="button_add p-3 m-3" th:href="@{/hadReadNovelToProfile(novelURL=${novel.getNovelURL()})}">

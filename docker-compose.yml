@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   db:
@@ -13,3 +13,9 @@ services:
       MYSQL_PASSWORD: QWERTY
     volumes:
       - "./mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"
+
+  redis:
+    container_name: redis_nosql
+    image: redis:latest
+    ports:
+      - "6379:6379"

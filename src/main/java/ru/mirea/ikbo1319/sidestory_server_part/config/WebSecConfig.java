@@ -12,11 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
-import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJdbcHttpSession
+@EnableRedisHttpSession
 @EnableWebSecurity
 public class WebSecConfig extends WebSecurityConfigurerAdapter {
 
@@ -44,7 +45,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .authorizeRequests()
-                        .antMatchers("/profile?*", "game_pages/**/**/**", "/addNovelToProfile?**",
+                        .antMatchers("/profile?*", "game_pages/**/**/**", "/nowReadNovelToProfile?**",
                         "/hadReadNovelToProfile?**", "/deleteHadReadNovel?**", "/deleteNowReadNovel?**")
                         .hasRole("USER")
                 .and()

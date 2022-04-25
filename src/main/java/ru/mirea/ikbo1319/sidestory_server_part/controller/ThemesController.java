@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ThemesController implements HttpSessionListener {
@@ -19,15 +21,13 @@ public class ThemesController implements HttpSessionListener {
     private String darkThemePath = "styles/main_page_dark.css";
     String defaultTheme = "light";
 
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("created");
-        se.getSession().setAttribute("THEME-SESSION", defaultTheme);
-    }
-
     @RequestMapping("/themes")
     public String postThemes(@RequestParam("currURL") String currURL,
-                            @RequestParam("nameTheme") String nameTheme, HttpServletRequest request){
+                            @RequestParam("nameTheme") String nameTheme, HttpServletRequest request, HttpSession session){
+
+        String themesSession = (String) session.getAttribute("THEME-SESSION");
+
+        System.out.println(themesSession);
 
         String currTheme = nameTheme;
         String theme = "";
@@ -46,8 +46,10 @@ public class ThemesController implements HttpSessionListener {
         return "redirect:" + currURL;
     }
 
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("destroyed");
+    @PostMapping("/destroy_session")
+    public String destroySession(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/";
     }
+
 }

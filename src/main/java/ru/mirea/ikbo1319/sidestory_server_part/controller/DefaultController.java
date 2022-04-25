@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 @Controller
-public class DefaultController implements HttpSessionListener {
+public class DefaultController {
 
     @Autowired
     NovelRepo novelRepo;
@@ -39,18 +39,6 @@ public class DefaultController implements HttpSessionListener {
     private String darkThemePath = "styles/main_page_dark.css";
 
     String defaultTheme = "light";
-
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("created");
-        se.getSession().setAttribute("THEME-SESSION", defaultTheme);
-    }
-
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        se.getSession().invalidate();
-        System.out.println("destroyed");
-    }
 
     @GetMapping("/main")
     public String mainPage(Model model){

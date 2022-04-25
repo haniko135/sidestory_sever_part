@@ -173,8 +173,12 @@
                                     <a th:href="@{'/info?novelURL=' +${nowread.getNovelURL()}}">
                                         <p class="profile_novel_name" th:text="${nowread.getNovelName()}"></p>
                                     </a>
-                                    <div class="d-flex wrap_button">
+                                    <div class="d-flex wrap_button" th:if="${nowread.getNovelStatus().equals('enable')}">
                                         <a th:href="@{'/content?novelId=' + ${nowread.getId()}}"><div class="play_button">ИГРАТЬ</div></a>
+                                        <a th:href="@{'/deleteNowReadNovel?novelURL=' + ${nowread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
+                                    </div>
+                                    <div class="d-flex wrap_button" th:if="${nowread.getNovelStatus().equals('not_enable')}">
+                                        <a style="cursor:pointer;" data-toggle="modal" data-target="#sorry" ><div class="play_button">ИГРАТЬ</div></a>
                                         <a th:href="@{'/deleteNowReadNovel?novelURL=' + ${nowread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
                                     </div>
                                 </div>
@@ -190,9 +194,13 @@
                                     <a th:href="@{'/info?novelURL=' +${hadread.getNovelURL()}}">
                                         <p class="profile_novel_name" th:text="${hadread.getNovelName()}"></p>
                                     </a>
-                                    <div class="d-flex wrap_button">
+                                    <div class="d-flex wrap_button" th:if="${hadread.getNovelStatus().equals('enable')}">
                                         <a th:href="@{'/content?novelId=' + ${hadread.getId()}}"><div class="play_button">ИГРАТЬ</div></a>
                                         <a th:href="@{'/deleteHadReadNovel?novelURL=' + ${hadread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
+                                    </div>
+                                    <div class="d-flex wrap_button" th:if="${hadread.getNovelStatus().equals('not_enable')}">
+                                        <a style="cursor:pointer;" data-toggle="modal" data-target="#sorry" ><div class="play_button">ИГРАТЬ</div></a>
+                                        <a th:href="@{'/deleteNowReadNovel?novelURL=' + ${hadread.getNovelURL()}}"><div class="play_button">УДАЛИТЬ</div></a>
                                     </div>
                                 </div>
                             </div>
@@ -241,6 +249,28 @@
             <ul id="menuSearch" th:each="novel:${novelsAll}">
                 <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
             </ul>
+        </div>
+
+        <div class="modal fade" id="sorry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-content-info">
+                    <div class="modal-header modal-header-info">
+                        <h5 class="modal-title" id="exampleModalLabel">Упс.....</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body-info">
+                        <div>
+                            <img class="modal-img" th:src="@{'/img/sad_cat_modal.jpg'}">
+                        </div>
+                        Приносим свои извинения, но на данный момент новелла не доступна к прочтению. Оставайтесь с нами!
+                    </div>
+                    <div class="modal-footer modal-footer-info">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Понятно</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
