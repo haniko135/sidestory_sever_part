@@ -218,3 +218,13 @@ button:before {
     background-color: #d0d0d0;
     color: #1b1209;
 }
+.modal-content-info{
+    background-color: #dfdfdf!important;
+}
+.modal-header-info, .modal-footer-info{
+    background: radial-gradient(100% 80%, #978568, #6b5a3f)!important;
+}
+.btn-primary{
+    background-color: #6b5a3f!important;
+    border-color: #7e6d36!important;
+}

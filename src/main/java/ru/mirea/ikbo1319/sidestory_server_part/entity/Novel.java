@@ -43,6 +43,8 @@ public class Novel {
     @Column(name = "novelURL", unique = true)
     private String novelURL;
 
+    @Column(name="novel_status")
+    private String novelStatus;
     public Novel() {
     }
 }

@@ -172,11 +172,16 @@
                                 </div>
                             </div>
 
-                            <div class="bottom d-flex justify-content-center">
+                            <div class="bottom d-flex justify-content-center" th:if="${novel.getNovelStatus().equals('enable')}">
                                 <a class="button_style_info" target="_self" th:href="@{'/content?novelId=' + ${novel.getId()}}">
                                     <!--<a href="#main_anchor" class="source" target="_self" onclick="createInfoBlocks('Вам точно есть 18+?', '../  ../../img/age.jpg', '#sorry' , '#home_anchor')">ИГРАТЬ</a>-->
                                     <div class="source_info" >ИГРАТЬ</div>
                                 </a>
+                            </div>
+                            <div th:if="${novel.getNovelStatus().equals('not_enable')}">
+                                <button class="button_style_info" type="button" data-toggle="modal" data-target="#sorry">
+                                    <span class="source_info" >ИГРАТЬ</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -223,6 +228,28 @@
             <ul id="menuSearch" th:each="novel:${novelsAll}">
                 <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
             </ul>
+        </div>
+
+        <div class="modal fade" id="sorry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-content-info">
+                    <div class="modal-header modal-header-info">
+                        <h5 class="modal-title" id="exampleModalLabel">Упс.....</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body-info">
+                        <div>
+                            <img class="modal-img" th:src="@{'/img/sad_cat_modal.jpg'}">
+                        </div>
+                        Приносим свои извинения, но на данный момент новелла не доступна к прочтению. Оставайтесь с нами!
+                    </div>
+                    <div class="modal-footer modal-footer-info">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Понятно</button>
+                    </div>
+                </div>
+            </div>
         </div>
             <!--<a id="sorry" onload="createInfoBlocks('Приносим свои извинения! Эта новелла ещё не готова. Оставайтесь с нами!', '../img/age.jpg', '#sorry' , '#home_anchor')"></a>-->
     </body>
