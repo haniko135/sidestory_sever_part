@@ -54,3 +54,62 @@ function searchOnPage() {
         }
     }
 }
+
+function showModalInfo(chapterName){
+    let base = document.createElement("div");
+    base.className = "modal fade";
+    base.id="exampleModal";
+    base.tabIndex=-1;
+    base.ariaLabeledBy="exampleModalLabel";
+    base.ariaHidden="true";
+    document.body.append(base);
+
+    let baseDialog = document.createElement("div");
+    baseDialog.className="modal-dialog";
+    base.append(baseDialog);
+
+    let baseContent = document.createElement("div");
+    baseContent.className="modal-content";
+    baseDialog.append(baseContent);
+
+    let baseHeader = document.createElement("div");
+    baseHeader.className="modal-header";
+    baseContent.append(baseHeader);
+
+    let baseTitle = document.createElement("h4");
+    baseTitle.className="modal-title";
+    baseTitle.id="exampleModalLabel";
+    baseTitle.innerHTML="Выберете игрового персонажа";
+    baseHeader.append(baseTitle);
+
+    let closeButton = document.createElement("button");
+    closeButton.type="button";
+    closeButton.className="close";
+    closeButton.dataDismiss="modal";
+    closeButton.ariaLabel="Close";
+    baseHeader.append(closeButton);
+
+    let closeButtonIcon = document.createElement("span");
+    closeButtonIcon.ariaHidden="true";
+    closeButtonIcon.innerHTML="&times";
+    closeButton.append(closeButtonIcon);
+
+    let baseBody = document.createElement("div");
+    baseBody.className="modal-body";
+    baseContent.append(baseBody);
+
+    let spanBodyTitle=document.createElement("span");
+    spanBodyTitle.innerHTML=chapterName;
+    baseBody.append(spanBodyTitle);
+
+    let baseFooter = document.createElement("div");
+    baseFooter.className="modal-footer";
+    baseBody.append(baseFooter);
+
+    let footerButton = document.createElement("button");
+    footerButton.type="button";
+    footerButton.className="btn btn-secondary";
+    footerButton.dataDismiss="modal";
+    footerButton.innerHTML="Закрыть";
+    baseFooter.append(footerButton);
+}

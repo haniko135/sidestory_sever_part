@@ -164,7 +164,7 @@ button:before {
 .content_header {
     color:#c5bba6;
 }
-.for_chapters > a {
+.for_chapters > span {
     color: #d1d1d1;
 }
 .main_info{
@@ -230,6 +230,7 @@ button:before {
     background-color: #111111d6!important;
     color:#c5bba6;
 }
-.btn-primary{
-    background: radial-gradient(#a7965e, #7e6d36)!important;
-    border-color: #272727!important;
+.btn-primary {
+    background: radial-gradient(#a7965e, #7e6d36) !important;
+    border-color: #272727 !important;
+}

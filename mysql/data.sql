@@ -115,6 +115,7 @@ insert into pages value ('39', 'Мэй Чансу', '', '2.2',b'00000','5');
 insert into pages value ('40', 'Мэй Чансу', 'Глава 3', '3.1',b'00001','5');
 insert into pages value ('41', 'Мэй Чансу', 'Глава 4', '4.1',b'00001','5');
 
+insert into pages value ('42', 'Ло Бинхэ', 'Глава 1. Переселение в главного героя', '1.1',b'00000','4');
 
 insert into t_user (id, active, password, username) value ('1', b'00001', '$2a$10$Iw.pUB5E00zP3VB.ISijKuWfTKbCxAnNTeotPaqjbATh8gsP.AkgO', 'Admin');
 insert into t_roles value ('1', 'ADMIN');

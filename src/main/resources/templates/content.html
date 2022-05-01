@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Оглавление</title>
+        <script src="webjars/sockjs-client/1.0.2/sockjs.js"></script>
+        <script src="webjars/stomp-websocket/2.3.3/stomp.js"></script>
         <link rel="stylesheet" th:href="${theme}">          <!--Контент внутри main-->
         <link rel="stylesheet" href="styles/main_page_main_theme.css">
         <link rel="stylesheet" href="styles/oglavlenie.css">
@@ -19,8 +21,11 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
         <script th:if="${theme.equals('styles/main_page_dark.css')}" src="js/oglavlenie_script_dark.js"></script>
         <script th:if="${theme.equals('styles/main_page_light.css')}" src="js/oglavlenie_script_light.js"></script>
+
     </head>
     <body class="background">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -132,58 +137,14 @@
                     <div class="d-flex col justify-content-start block_chapter" th:each="chapter:${chapters}">
                         <p class="for_chapters">
                             <a style="display: none" class="ch_href" ></a>
-                            <a th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}" th:text="${chapter.getNameSource()}"></a>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                            <span th:text="${chapter.getNameSource()}"></span>
+                            <button id="buttonContent" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" th:data-novelId="${chapter.getNovel().getId()}" th:data-href="${chapter.getSource()}" th:data-novelURL="${chapter.getNovel().getNovelURL()}">
                                 Играть
                             </button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                                            <a class="btn btn-primary" th:href="@{'game_pages/' + ${chapter.getNovel().getNovelURL()} + '/' + ${chapter.getCurrentCharacter()} + '/' + ${chapter.getSource()}}">Сохранить изменения</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </p>
                     </div>
                 </div>
 
-                <div id="ch_2d">
-                    <div id="okno_wolf_d">
-                        За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>
-                        <img src="img/Чан Ген.jpg" alt="Чан Ген">
-                        <img src="img/Гу Юнь.jpg" alt="Шэнь Шилю">
-                        <div>
-                            <div><a href="Чан Ген/2 глава/ch_2_1.html"
-                                    class="close">Чан Ген</a></div>
-                            <div><a href="#" class="close">Шэнь Шилю</a></div>
-                        </div>
-                    </div>
-                </div>
-        
-                <div id="ch_3d">
-                    <div id="okno_wolf_d">
-                        За кого вы хотите играть? <a href="#home_anchor">&times;</a> <br>
-                        <img src="img/Чан Ген.jpg" alt="Чан Ген">
-                        <img src="img/Гу Юнь.jpg" alt="Шэнь Шилю">
-                        <div>
-                            <div><a href="Чан Ген/3 глава/ch_3_1.html"
-                                    class="close">Чан Ген</a></div>
-                            <div><a href="#" class="close">Шэнь Шилю</a></div>
-                        </div>
-                    </div>
-                </div>
 
 
                 <div id="mySidenav" class="sidenav">
@@ -200,8 +161,27 @@
                         <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
                     </ul>
                 </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Выберете персонажа</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="one">
+                            </div>
+                            <div class="modal-footer" id="two">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
+        <script type="text/javascript" src="js/modalScript.js"></script>
     </body>
 </html> 

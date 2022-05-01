@@ -160,7 +160,7 @@ button:before {
 .content_header {
     color: #524833;
 }
-.for_chapters > a {
+.for_chapters > span {
     color: #675014;
 }
 .main_info{
