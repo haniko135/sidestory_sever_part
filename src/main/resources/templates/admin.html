@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Страница администратора</title>
@@ -16,6 +16,8 @@
     <!--Google Fonts Roboto для основного текста-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script th:if="${theme.equals('styles/main_page_dark.css')}" src="/js/main_page_script_dark.js"></script>
@@ -23,177 +25,242 @@
     <script src="/js/api_methods.js"></script>
 </head>
 <body>
-    <header id="pageHeader">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+
+    <div class="container-fluid">
         <a name="home_anchor"></a>
-        <p class="name_style">SideStory</p>
-    </header>
+        <nav class="row justify-content-evenly navbar navbar-expand-xxl sticky-top" id="pageHeader">
+            <button class="navbar-toggler text-left" type="button" data-toggle="collapse" data-target="#pageMenu" aria-controls="pageMenu" aria-expanded="false" id="menuBar">
+                <span class="navbar-toggler-icon" id="menuIcon"><i class="fa fa-bars"></i></span>
+            </button>
+            <div >
+                <a class="navbar-brand" href="#home_anchor"><p class="name_style">SideStory</p></a>
+            </div>
+            <div class="col-lg-2 col-md-3 d-flex stylish justify-content-around" id="profileBlock">
+                <div class="row align-content-center img_profile">
+                    <img src="/img/profile.jpg" width="70px">
+                </div>
+                <div class="row d-flex align-items-center flex-md-column flex-lg-column">
+                    <p class="span_block_p" sec:authorize="isAnonymous()">
+                        <a class="span_profile" href="/login">Войдите</a>
+                    </p>
+                    <p class="span_block_p" sec:authorize="isAuthenticated()">
+                    <div sec:authorize="hasAnyAuthority('USER')">
+                        <a class="span_profile" href="/profile" th:text="${users.getUsername()}"></a>
+                    </div>
+                    <div sec:authorize="hasAnyAuthority('MODERATOR', 'ADMIN')">
+                        <a class="span_profile" href="/admin">Консоль БД</a>
+                    </div>
+                    </p>
+                    <p class="span_block_p" sec:authorize="isAuthenticated()">
+                        <a class="span_profile" th:href="@{/logout}" >Выйти</a>
+                    </p>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse overlay-content" id="pageMenu">
+                <ul class="navbar-nav icon-bar">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/main" id="homeIcon">
+                            <i class="fa fa-home" data-tooltip="Домой"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/instruction">
+                            <i class="fa fa-question" data-tooltip="Помощь"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=login&nameTheme=dark'}">
+                            <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=login&nameTheme=light'}">
+                            <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">
+                            <i class="fa fa-user" data-tooltip="Юзер"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
+        <div class="row">
+            <div class="col-sm-1-2 position" id="pageMenu1">
+                <ul class="icon-bar">
+                    <li>
+                        <a href="/main" id="homeIcon">
+                            <i class="fa fa-home" data-tooltip="Домой"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#home_anchor" onclick="openNav()" id="searchIcon">
+                            <i class="fa fa-search" data-tooltip="Поиск"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/instruction">
+                            <i class="fa fa-question" data-tooltip="Помощь"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=login&nameTheme=dark'}">
+                            <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=login&nameTheme=light'}">
+                            <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-11 d-flex flex-md-wrap flex-wrap justify-content-center" id="main">
 
-    <div id="menuBar">
-        <div class="icon-bar">
-            <a href="#home_anchor" class="active" onclick="dropMenu()" id="menuIcon"><i class="fa fa-bars"></i></a>
+                <div>
+                    <table>
+                        <caption class="span_p">Novel</caption>
+                        <tr>
+                            <th>ID</th>
+                            <th>novel_attention</th>
+                            <th>novel_author</th>
+                            <th>novel_description</th>
+                            <th>novel_genre</th>
+                            <th>novel_img</th>
+                            <th>novel_name</th>
+                            <th>novel_rating</th>
+                            <th>rating_age</th>
+                            <th>novelurl</th>
+                            <th>кнопка</th>
+                        </tr>
+                        <tr th:each="novel:${novels}">
+                            <td th:text=${novel.getId()}></td>
+                            <td th:text=${novel.getNovelAttention()}></td>
+                            <td th:text=${novel.getNovelAuthor()}></td>
+                            <td th:text=${novel.getNovelDescription()}></td>
+                            <td th:text=${novel.getNovelGenre()}></td>
+                            <td th:text=${novel.getNovelImg()}></td>
+                            <td th:text=${novel.getNovelName()}></td>
+                            <td th:text=${novel.getNovelRating()}></td>
+                            <td th:text=${novel.getRatingAge()}></td>
+                            <td th:text=${novel.getNovelURL()}></td>
+                            <td><a th:attr="onclick=|deleteNovel(${novel.getId()})|" href="#"><div class="button_admin">-</div></a></td>
+                        </tr>
+                        <form th:action="@{/addNovel}" th:object="${novelNew}" method="post">
+                            <td><input type="number" name="id" placeholder="Введите id"></td>
+                            <td><input type="text" name="novelAttention" placeholder="Введите предупреждения"></td>
+                            <td><input type="text" name="novelAuthor" placeholder="Введите автора"></td>
+                            <td><input type="text" name="novelDescription" placeholder="Введите описание"></td>
+                            <td><input type="text" name="novelGenre" placeholder="Введите жанр"></td>
+                            <td><input type="text" name="novelImg" placeholder="Введите ссылку"></td>
+                            <td><input type="text" name="novelName" placeholder="Введите название"></td>
+                            <td><input type="text" name="novelRating" placeholder="Введите рейтинг"></td>
+                            <td><input type="number" name="ratingAge" placeholder="Введите возраст"></td>
+                            <td><input type="text" name="novelURL" placeholder="Введите URL"></td>
+                            <td><button class="button_admin" type="submit">+</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+
+                <div>
+                    <table>
+                        <caption class="span_p">Pages</caption>
+                        <tr>
+                            <th>ID</th>
+                            <th>current_character</th>
+                            <th>name_source</th>
+                            <th>source</th>
+                            <th>start_source</th>
+                            <th>novel_id</th>
+                            <th>кнопка</th>
+                        </tr>
+                        <tr th:each="page:${pages}">
+                            <td th:text=${page.getId()}></td>
+                            <td th:text=${page.getCurrentCharacter()}></td>
+                            <td th:text=${page.getNameSource()}></td>
+                            <td th:text=${page.getSource()}></td>
+                            <td th:text=${page.getStartSource()}></td>
+                            <td th:text=${page.getNovel()}></td>
+                            <td><a th:attr="onclick=|deletePage(${page.getId()})|" href="#"><div class="button_admin">-</div></a></td>
+                        </tr>
+                        <form th:action="@{/addPage}" th:object="${pageNew}" method="post">
+                            <td><input type="number" name="id" placeholder="Введите id"></td>
+                            <td><input type="text" name="currentCharacter" placeholder="Введите героя"></td>
+                            <td><input type="text" name="nameSource" placeholder="Введите название главы"></td>
+                            <td><input type="text" name="source" placeholder="Введите ссылку на главу"></td>
+                            <td><input type="text" name="startSource" placeholder="Введите глава начальная или нет"></td>
+                            <td><input type="number" name="novel" placeholder="Введите id новеллы"></td>
+                            <td><button class="button_admin" type="submit">+</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                    <form th:action="@{/addChapFile}" enctype="multipart/form-data" method="post">
+                        <input type="file" name="chapNovel">
+                        <button class="button_admin" type="submit">добавить</button>
+                    </form>
+                </div>
+
+                <div>
+                    <table>
+                        <caption class="span_p">Users</caption>
+                        <tr>
+                            <th>ID</th>
+                            <th>age</th>
+                            <th>email</th>
+                            <th>img</th>
+                            <th>password</th>
+                            <th>sex</th>
+                            <th>username</th>
+                            <th>active</th>
+                            <th>кнопка</th>
+                        </tr>
+                        <tr th:each="user:${users}">
+                            <td th:text=${user.getId()}></td>
+                            <td th:text=${user.getAge()}></td>
+                            <td th:text=${user.getEmail()}></td>
+                            <td th:text=${user.getImg()}></td>
+                            <td th:text=${user.getPassword()}></td>
+                            <td th:text=${user.getSex()}></td>
+                            <td th:text=${user.getUsername()}></td>
+                            <td th:text=${user.getActive()}></td>
+                            <td><a th:attr="onclick=|deleteUser(${user.getId()})|" href="#"><div class="button_admin">-</div></a></td>
+                        </tr>
+                        <form th:action="@{/addUser}" th:object="${userNew}" method="post">
+                            <td><input type="number" name="id" placeholder="Введите id"></td>
+                            <td><input type="text" name="age" placeholder="Введите возраст"></td>
+                            <td><input type="text" name="email" placeholder="Введите почту"></td>
+                            <td><input type="text" name="img" placeholder="Введите ссылку на аву"></td>
+                            <td><input type="text" name="password" placeholder="Введите пароль"></td>
+                            <td><input type="text" name="sex" placeholder="Введите пол"></td>
+                            <td><input type="text" name="username" placeholder="Введите имя пользователя"></td>
+                            <td><button class="button_admin" type="submit">+</button></td>
+                            </tr>
+                        </form>
+                        <form th:action="@{/addUser}" th:object="${userNew}" method="post">
+                            <td><input type="number" name="id" placeholder="Введите id"></td>
+                            <td><input type="text" name="active" placeholder="Введите статус"></td>
+                            <td><button class="button_admin" type="submit">Забанить пользователя</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-
-
-    <div id="pageMenu">
-        <div class="icon-bar">
-            <a href="/main" id="homeIcon">
-                <i class="fa fa-home" data-tooltip="Домой"></i>
-            </a>
-            <a href="#home_anchor" onclick="openNav()" id="searchIcon">
-                <i class="fa fa-search" data-tooltip="Поиск"></i>
-            </a>
-            <a href="/instruction">
-                <i class="fa fa-question" data-tooltip="Помощь"></i>
-            </a>
-            <a th:if="${theme.equals('styles/main_page_dark.css')}" th:href="@{'/themes?currURL=profile&nameTheme=dark'}">
-                <i class="fa fa-adjust" data-tooltip="Светлая тема"></i>
-            </a>
-            <a th:if="${theme.equals('styles/main_page_light.css')}" th:href="@{'/themes?currURL=profile&nameTheme=light'}">
-                <i class="fa fa-adjust" data-tooltip="Темная тема"></i>
-            </a>
-        </div>
-    </div>
-
-
-    <div id="mySidenav" class="sidenav">
-        <p class="search_p">Поиск</p>
-        <form>
-            <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
-            <button type="submit" title="submit"></button>
-        </form>
-        <ul id="menuSearch" th:each="novel:${novelsAll}">
-            <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
-        </ul>
-    </div>
-
-
-
-    <div id="main">
-        <div>
-            <table>
-                <caption class="span_p">Novel</caption>
-                <tr>
-                    <th>ID</th>
-                    <th>novel_attention</th>
-                    <th>novel_author</th>
-                    <th>novel_description</th>
-                    <th>novel_genre</th>
-                    <th>novel_img</th>
-                    <th>novel_name</th>
-                    <th>novel_rating</th>
-                    <th>rating_age</th>
-                    <th>novelurl</th>
-                    <th>кнопка</th>
-                </tr>
-                <tr th:each="novel:${novels}">
-                    <td th:text=${novel.getId()}></td>
-                    <td th:text=${novel.getNovelAttention()}></td>
-                    <td th:text=${novel.getNovelAuthor()}></td>
-                    <td th:text=${novel.getNovelDescription()}></td>
-                    <td th:text=${novel.getNovelGenre()}></td>
-                    <td th:text=${novel.getNovelImg()}></td>
-                    <td th:text=${novel.getNovelName()}></td>
-                    <td th:text=${novel.getNovelRating()}></td>
-                    <td th:text=${novel.getRatingAge()}></td>
-                    <td th:text=${novel.getNovelURL()}></td>
-                    <td><a th:attr="onclick=|deleteNovel(${novel.getId()})|" href="#"><div class="button_admin">-</div></a></td>
-                </tr>
-                <form th:action="@{/addNovel}" th:object="${novelNew}" method="post">
-                    <td><input type="number" name="id" placeholder="Введите id"></td>
-                    <td><input type="text" name="novelAttention" placeholder="Введите предупреждения"></td>
-                    <td><input type="text" name="novelAuthor" placeholder="Введите автора"></td>
-                    <td><input type="text" name="novelDescription" placeholder="Введите описание"></td>
-                    <td><input type="text" name="novelGenre" placeholder="Введите жанр"></td>
-                    <td><input type="text" name="novelImg" placeholder="Введите ссылку"></td>
-                    <td><input type="text" name="novelName" placeholder="Введите название"></td>
-                    <td><input type="text" name="novelRating" placeholder="Введите рейтинг"></td>
-                    <td><input type="number" name="ratingAge" placeholder="Введите возраст"></td>
-                    <td><input type="text" name="novelURL" placeholder="Введите URL"></td>
-                    <td><button class="button_admin" type="submit">+</button></td>
-                    </tr>
-                </form>
-            </table>
-        </div>
-
-        <div>
-            <table>
-                <caption class="span_p">Pages</caption>
-                <tr>
-                    <th>ID</th>
-                    <th>current_character</th>
-                    <th>name_source</th>
-                    <th>source</th>
-                    <th>start_source</th>
-                    <th>novel_id</th>
-                    <th>кнопка</th>
-                </tr>
-                <tr th:each="page:${pages}">
-                    <td th:text=${page.getId()}></td>
-                    <td th:text=${page.getCurrentCharacter()}></td>
-                    <td th:text=${page.getNameSource()}></td>
-                    <td th:text=${page.getSource()}></td>
-                    <td th:text=${page.getStartSource()}></td>
-                    <td th:text=${page.getNovel()}></td>
-                    <td><a th:attr="onclick=|deletePage(${page.getId()})|" href="#"><div class="button_admin">-</div></a></td>
-                </tr>
-                <form th:action="@{/addPage}" th:object="${pageNew}" method="post">
-                    <td><input type="number" name="id" placeholder="Введите id"></td>
-                    <td><input type="text" name="currentCharacter" placeholder="Введите героя"></td>
-                    <td><input type="text" name="nameSource" placeholder="Введите название главы"></td>
-                    <td><input type="text" name="source" placeholder="Введите ссылку на главу"></td>
-                    <td><input type="text" name="startSource" placeholder="Введите глава начальная или нет"></td>
-                    <td><input type="number" name="novel" placeholder="Введите id новеллы"></td>
-                    <td><button class="button_admin" type="submit">+</button></td>
-                    </tr>
-                </form>
-            </table>
-        </div>
-
-        <div>
-            <table>
-                <caption class="span_p">Users</caption>
-                <tr>
-                    <th>ID</th>
-                    <th>age</th>
-                    <th>email</th>
-                    <th>img</th>
-                    <th>password</th>
-                    <th>sex</th>
-                    <th>username</th>
-                    <th>active</th>
-                    <th>кнопка</th>
-                </tr>
-                <tr th:each="user:${users}">
-                    <td th:text=${user.getId()}></td>
-                    <td th:text=${user.getAge()}></td>
-                    <td th:text=${user.getEmail()}></td>
-                    <td th:text=${user.getImg()}></td>
-                    <td th:text=${user.getPassword()}></td>
-                    <td th:text=${user.getSex()}></td>
-                    <td th:text=${user.getUsername()}></td>
-                    <td th:text=${user.getActive()}></td>
-                    <td><a th:attr="onclick=|deleteUser(${user.getId()})|" href="#"><div class="button_admin">-</div></a></td>
-                </tr>
-                <form th:action="@{/addUser}" th:object="${userNew}" method="post">
-                    <td><input type="number" name="id" placeholder="Введите id"></td>
-                    <td><input type="text" name="age" placeholder="Введите возраст"></td>
-                    <td><input type="text" name="email" placeholder="Введите почту"></td>
-                    <td><input type="text" name="img" placeholder="Введите ссылку на аву"></td>
-                    <td><input type="text" name="password" placeholder="Введите пароль"></td>
-                    <td><input type="text" name="sex" placeholder="Введите пол"></td>
-                    <td><input type="text" name="username" placeholder="Введите имя пользователя"></td>
-                    <td><button class="button_admin" type="submit">+</button></td>
-                    </tr>
-                </form>
-                <form th:action="@{/addUser}" th:object="${userNew}" method="post">
-                    <td><input type="number" name="id" placeholder="Введите id"></td>
-                    <td><input type="text" name="active" placeholder="Введите статус"></td>
-                    <td><button class="button_admin" type="submit">Забанить пользователя</button></td>
-                    </tr>
-                </form>
-            </table>
+        <div id="mySidenav" class="sidenav">
+            <p class="search_p">Поиск</p>
+            <form>
+                <input type="search" placeholder="Введите искомое здесь..." title="searchline" id="textToFind" onkeyup="searchOnPage()">
+                <button type="submit" title="submit"></button>
+            </form>
+            <ul id="menuSearch" th:each="novel:${novelsAll}">
+                <li><a th:href="@{'/info?novelURL='+ ${novel.getNovelURL()}}" th:text="${novel.getNovelName()}"></a></li>
+            </ul>
         </div>
     </div>
 </body>

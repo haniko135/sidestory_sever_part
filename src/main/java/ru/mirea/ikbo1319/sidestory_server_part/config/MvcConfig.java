@@ -12,6 +12,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${upload.path}")
     private String imgsPath;
 
+    @Value("C:/Users/Nastya/Desktop/practica_git/Sidestory_server_part — копия/src/main/resources/templates/game_pages/")
+    private String gamePagesPath;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -24,6 +27,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/usersImages/**")
                 .addResourceLocations("file:" + imgsPath);
+        registry.addResourceHandler("/templates/game_pages/**")
+                .addResourceLocations("file:" + gamePagesPath);
     }
 
 }

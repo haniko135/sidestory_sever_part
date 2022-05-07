@@ -1,11 +1,14 @@
 package ru.mirea.ikbo1319.sidestory_server_part.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Novel;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Pages;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Users;
@@ -13,9 +16,12 @@ import ru.mirea.ikbo1319.sidestory_server_part.repository.NovelRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.PagesRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.UsersRepo;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -36,7 +42,12 @@ public class AdminController implements HttpSessionListener {
     private String lightThemePath = "styles/main_page_light.css";
     private String darkThemePath = "styles/main_page_dark.css";
 
+    @Value("C:/Users/Nastya/Desktop/practica_git/Sidestory_server_part — копия/src/main/resources")
+    private String gamePagesPath;
+
     String defaultTheme = "light";
+
+    private Long lastChapId;
 
     public void themeChange(Model model){
         String color = (String) session.getAttribute("THEME-SESSION");
@@ -51,18 +62,6 @@ public class AdminController implements HttpSessionListener {
                 model.addAttribute("theme", darkThemePath);
             }
         }
-    }
-
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("created");
-        se.getSession().setAttribute("THEME-SESSION", defaultTheme);
-    }
-
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        se.getSession().invalidate();
-        System.out.println("destroyed");
     }
 
     @GetMapping("/admin")
@@ -123,7 +122,7 @@ public class AdminController implements HttpSessionListener {
     }
 
     @PostMapping("/addPage")
-    public String addPage(@ModelAttribute("pageNew") Pages page) {
+    public String addPage(@ModelAttribute("pageNew") Pages page, HttpServletRequest request) {
         if(pagesRepo.findById(page.getId()).isPresent()){
             System.out.println("Страница существует");
             pagesRepo.findById(page.getId()).map(page1 -> {
@@ -137,12 +136,33 @@ public class AdminController implements HttpSessionListener {
                     page1.setCurrentCharacter(page.getCurrentCharacter());
                 if(page.getNovel()!=null && !Objects.equals(page.getNovel(), ""))
                     page1.setNovel(page.getNovel());
+
                 return "redirect:/admin";
             });
         }
         else {
+            lastChapId = page.getId();
+            System.out.println(lastChapId);
             pagesRepo.save(page);
         }
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/addChapFile")
+    public String addChapFile(@RequestParam("chapNovel") MultipartFile file) throws IOException {
+        if(file.getOriginalFilename().equals("")){
+            return "redirect:/admin";
+        }
+        System.out.println(gamePagesPath);
+        File uploadDir = new File(gamePagesPath);
+        if (!uploadDir.exists()){
+            uploadDir.mkdir();
+        }
+        System.out.println(lastChapId);
+        Pages page = pagesRepo.findAllById(lastChapId);
+        page.toString();
+        file.transferTo(new File(gamePagesPath + page.getNovel().getNovelURL() + page.getCurrentCharacter() + file.getOriginalFilename()));
+
         return "redirect:/admin";
     }
 
