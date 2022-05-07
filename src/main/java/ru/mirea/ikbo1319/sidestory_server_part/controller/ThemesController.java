@@ -29,15 +29,12 @@ public class ThemesController implements HttpSessionListener {
 
         System.out.println(themesSession);
 
-        String currTheme = nameTheme;
         String theme = "";
 
-        if(currTheme.equals("light")){
-            //currTheme = "dark";
+        if(nameTheme.equals("light")){
             theme = "dark";
         }
         else{
-            //currTheme = "light";
             theme = "light";
         }
         request.getSession().setAttribute("THEME-SESSION", theme);

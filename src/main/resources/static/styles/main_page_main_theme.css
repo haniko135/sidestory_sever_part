@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
 }
+
+/*noinspection ALL*/
 @media(min-width: 320px) and (max-width: 749px){
     #profileBlock{
         display:none!important;
@@ -210,6 +212,8 @@
         justify-content: space-between!important;
     }
 }
+
+/*noinspection ALL*/
 @media (min-width:750px) and (max-width: 1023px){
     #menuBar{
         padding: 15px;
@@ -237,7 +241,7 @@
         margin: 2vh 1vw 1vh 0;
     }
     .playButton{
-        padding: 0px 7px;
+        padding: 0 7px;
         text-align: center;
     }
     .source{
@@ -430,6 +434,8 @@
         justify-content: space-between!important;
     }
 }
+
+/*noinspection ALL*/
 @media (min-width: 1024px) and (max-width: 2560px){
     #menuBar{
         display: none;

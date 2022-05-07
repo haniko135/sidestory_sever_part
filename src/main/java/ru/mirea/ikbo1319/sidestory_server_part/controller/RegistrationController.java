@@ -42,9 +42,6 @@ public class RegistrationController{
     @Value("${upload.path}")
     String imgsPath;
 
-    private String lightThemePath = "styles/main_page_light.css";
-    private String darkThemePath = "styles/main_page_dark.css";
-
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -59,6 +56,7 @@ public class RegistrationController{
         if(bindingResult.hasErrors()){
             String color = (String) session.getAttribute("THEME-SESSION");
             System.out.println("здеся");
+            String lightThemePath = "styles/main_page_light.css";
             if(color == null){
                 model.addAttribute("theme", lightThemePath);
             }
@@ -66,6 +64,7 @@ public class RegistrationController{
                 if (color.equals("light")) {
                     model.addAttribute("theme", lightThemePath);
                 } else {
+                    String darkThemePath = "styles/main_page_dark.css";
                     model.addAttribute("theme", darkThemePath);
                 }
             }

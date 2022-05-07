@@ -39,19 +39,14 @@ public class AdminController implements HttpSessionListener {
     @Autowired
     HttpSession session;
 
-    private String lightThemePath = "styles/main_page_light.css";
-    private String darkThemePath = "styles/main_page_dark.css";
-
     @Value("C:/Users/Nastya/Desktop/practica_git/Sidestory_server_part — копия/src/main/resources")
     private String gamePagesPath;
-
-    String defaultTheme = "light";
 
     private Long lastChapId;
 
     public void themeChange(Model model){
         String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
+        String lightThemePath = "styles/main_page_light.css";
         if(color == null){
             model.addAttribute("theme", lightThemePath);
         }
@@ -59,6 +54,7 @@ public class AdminController implements HttpSessionListener {
             if (color.equals("light")) {
                 model.addAttribute("theme", lightThemePath);
             } else {
+                String darkThemePath = "styles/main_page_dark.css";
                 model.addAttribute("theme", darkThemePath);
             }
         }

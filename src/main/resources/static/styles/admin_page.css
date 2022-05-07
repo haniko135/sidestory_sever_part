@@ -37,8 +37,8 @@ button:before {
 }
 button{
     position: relative;
-    top: 0px !important;
-    right: 0px !important;
+    top: 0 !important;
+    right: 0 !important;
     width: 50px !important;
     height: 50px !important;
     border: none;

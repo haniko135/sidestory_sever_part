@@ -139,16 +139,16 @@
                             <th>кнопка</th>
                         </tr>
                         <tr th:each="novel:${novels}">
-                            <td th:text=${novel.getId()}></td>
-                            <td th:text=${novel.getNovelAttention()}></td>
-                            <td th:text=${novel.getNovelAuthor()}></td>
-                            <td th:text=${novel.getNovelDescription()}></td>
-                            <td th:text=${novel.getNovelGenre()}></td>
-                            <td th:text=${novel.getNovelImg()}></td>
-                            <td th:text=${novel.getNovelName()}></td>
-                            <td th:text=${novel.getNovelRating()}></td>
-                            <td th:text=${novel.getRatingAge()}></td>
-                            <td th:text=${novel.getNovelURL()}></td>
+                            <td th:text="${novel.getId()}"></td>
+                            <td th:text="${novel.getNovelAttention()}"></td>
+                            <td th:text="${novel.getNovelAuthor()}"></td>
+                            <td th:text="${novel.getNovelDescription()}"></td>
+                            <td th:text="${novel.getNovelGenre()}"></td>
+                            <td th:text="${novel.getNovelImg()}"></td>
+                            <td th:text="${novel.getNovelName()}"></td>
+                            <td th:text="${novel.getNovelRating()}"></td>
+                            <td th:text="${novel.getRatingAge()}"></td>
+                            <td th:text="${novel.getNovelURL()}"></td>
                             <td><a th:attr="onclick=|deleteNovel(${novel.getId()})|" href="#"><div class="button_admin">-</div></a></td>
                         </tr>
                         <form th:action="@{/addNovel}" th:object="${novelNew}" method="post">
@@ -181,12 +181,12 @@
                             <th>кнопка</th>
                         </tr>
                         <tr th:each="page:${pages}">
-                            <td th:text=${page.getId()}></td>
-                            <td th:text=${page.getCurrentCharacter()}></td>
-                            <td th:text=${page.getNameSource()}></td>
-                            <td th:text=${page.getSource()}></td>
-                            <td th:text=${page.getStartSource()}></td>
-                            <td th:text=${page.getNovel()}></td>
+                            <td th:text="${page.getId()}"></td>
+                            <td th:text="${page.getCurrentCharacter()}"></td>
+                            <td th:text="${page.getNameSource()}"></td>
+                            <td th:text="${page.getSource()}"></td>
+                            <td th:text="${page.getStartSource()}"></td>
+                            <td th:text="${page.getNovel()}"></td>
                             <td><a th:attr="onclick=|deletePage(${page.getId()})|" href="#"><div class="button_admin">-</div></a></td>
                         </tr>
                         <form th:action="@{/addPage}" th:object="${pageNew}" method="post">
@@ -221,14 +221,14 @@
                             <th>кнопка</th>
                         </tr>
                         <tr th:each="user:${users}">
-                            <td th:text=${user.getId()}></td>
-                            <td th:text=${user.getAge()}></td>
-                            <td th:text=${user.getEmail()}></td>
-                            <td th:text=${user.getImg()}></td>
-                            <td th:text=${user.getPassword()}></td>
-                            <td th:text=${user.getSex()}></td>
-                            <td th:text=${user.getUsername()}></td>
-                            <td th:text=${user.getActive()}></td>
+                            <td th:text="${user.getId()}"></td>
+                            <td th:text="${user.getAge()}"></td>
+                            <td th:text="${user.getEmail()}"></td>
+                            <td th:text="${user.getImg()}"></td>
+                            <td th:text="${user.getPassword()}"></td>
+                            <td th:text="${user.getSex()}"></td>
+                            <td th:text="${user.getUsername()}"></td>
+                            <td th:text="${user.getActive()}"></td>
                             <td><a th:attr="onclick=|deleteUser(${user.getId()})|" href="#"><div class="button_admin">-</div></a></td>
                         </tr>
                         <form th:action="@{/addUser}" th:object="${userNew}" method="post">

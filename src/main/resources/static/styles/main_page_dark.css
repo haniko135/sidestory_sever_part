@@ -151,11 +151,7 @@ button:before {
 #menuSearch li a:hover{
     background-color: #ffffff;
 }
-.block-with-info{
-    background-color: rgb(17, 17, 17);
-    border: 3px solid #000000;
-    color: #d8d8d8;
-}
+
 .close {                                                /*кнопки в окне*/
     border: 1px solid #000000;
     color: #141414;
@@ -167,18 +163,26 @@ button:before {
 .for_chapters > span {
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .main_info{
     border-bottom: 2px solid rgb(173, 173, 173);
 }
+
+/*noinspection CssUnusedSymbol*/
 .profile_username{
     color: #d8d8d8;
 }
 .profile_checkboks > p, .profile_checkboks > div > p, .profile_sex > div > label{
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .profile_info{
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .now_read{
     border-right: 3px solid rgb(173, 173, 173);
 }
@@ -195,20 +199,30 @@ button:before {
     border: none;
     background-color: #252525;
 }
+
+/*noinspection CssUnusedSymbol*/
 .profile_novel_name{
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .play_button{
     border: 2px solid #7e6d36;
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .play_button:hover{
     background: radial-gradient(#a7965e, #7e6d36);
     border: 2px solid #272727;
 }
+
+/*noinspection CssUnusedSymbol*/
 .login_header{
     color: #d8d8d8;
 }
+
+/*noinspection CssUnusedSymbol*/
 .help_text{
     color: #d8d8d8;
 }
@@ -218,6 +232,8 @@ button:before {
 .profile_checkboks > label{
     color: #d1d1d1;
 }
+
+/*noinspection CssUnusedSymbol*/
 .error_messages{
     background-color: #262626;
     color: #cecece;

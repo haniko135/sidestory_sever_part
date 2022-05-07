@@ -38,11 +38,4 @@ a{
 a:hover{
     color: skyblue;
 }
-.smth{
-    display: none; 
-    position: absolute;
-}
-.img_ch{
-    width: 100%;
-    height: 100%;
-}
+

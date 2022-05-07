@@ -13,10 +13,7 @@ import ru.mirea.ikbo1319.sidestory_server_part.repository.NovelRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.PagesRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.UsersRepo;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -35,22 +32,15 @@ public class DefaultController {
     @Autowired
     HttpSession session;
 
-    private String lightThemePath = "styles/main_page_light.css";
-    private String darkThemePath = "styles/main_page_dark.css";
-
-    String defaultTheme = "light";
-
-    @GetMapping("/main")
-    public String mainPage(Model model){
-        Iterable<Novel> novels = novelRepo.findAll();
-        model.addAttribute("novels", novels);
-
+    public void authentication(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users activeUser = usersRepo.findByUsername(auth.getName());
         model.addAttribute("users", activeUser);
+    }
 
+    public void themeChange(Model model){
         String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
+        String lightThemePath = "styles/main_page_light.css";
         if(color == null){
             model.addAttribute("theme", lightThemePath);
         }
@@ -58,9 +48,20 @@ public class DefaultController {
             if (color.equals("light")) {
                 model.addAttribute("theme", lightThemePath);
             } else {
+                String darkThemePath = "styles/main_page_dark.css";
                 model.addAttribute("theme", darkThemePath);
             }
         }
+    }
+
+    @GetMapping("/main")
+    public String mainPage(Model model){
+        Iterable<Novel> novels = novelRepo.findAll();
+        model.addAttribute("novels", novels);
+
+        authentication(model);
+        themeChange(model);
+
         return "main_page";
     }
 
@@ -72,22 +73,9 @@ public class DefaultController {
         Novel novels1 = novelRepo.findAllByNovelURL(novelURL);
         model.addAttribute("novel",novels1);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
+        authentication(model);
+        themeChange(model);
 
-        String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
-        if(color == null){
-            model.addAttribute("theme", lightThemePath);
-        }
-        else {
-            if (color.equals("light")) {
-                model.addAttribute("theme", lightThemePath);
-            } else {
-                model.addAttribute("theme", darkThemePath);
-            }
-        }
         return "info";
     }
 
@@ -102,22 +90,9 @@ public class DefaultController {
         ArrayList<Pages> chapters = pagesRepo.findAllByNovel_IdAndAndStartSourceIsTrue(novelId);
         model.addAttribute("chapters", chapters);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
+        authentication(model);
+        themeChange(model);
 
-        String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
-        if(color == null){
-            model.addAttribute("theme", lightThemePath);
-        }
-        else {
-            if (color.equals("light")) {
-                model.addAttribute("theme", lightThemePath);
-            } else {
-                model.addAttribute("theme", darkThemePath);
-            }
-        }
         return "content";
     }
 
@@ -133,46 +108,19 @@ public class DefaultController {
 
     @GetMapping("/registration")
     public String registration(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
+        authentication(model);
         if(!model.containsAttribute("user")){
             model.addAttribute("user", new Users());
         }
 
-        String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
-        if(color == null){
-            model.addAttribute("theme", lightThemePath);
-        }
-        else {
-            if (color.equals("light")) {
-                model.addAttribute("theme", lightThemePath);
-            } else {
-                model.addAttribute("theme", darkThemePath);
-            }
-        }
+        themeChange(model);
         return "registration";
     }
 
     @GetMapping("/login")
     public String login(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users activeUser = usersRepo.findByUsername(auth.getName());
-        model.addAttribute("users", activeUser);
-
-        String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
-        if(color == null){
-            model.addAttribute("theme", lightThemePath);
-        }
-        else {
-            if (color.equals("light")) {
-                model.addAttribute("theme", lightThemePath);
-            } else {
-                model.addAttribute("theme", darkThemePath);
-            }
-        }
+        authentication(model);
+        themeChange(model);
         return "login";
     }
 
@@ -194,19 +142,7 @@ public class DefaultController {
 
         Set<Novel> novelSetHave = users.getHaveReadNovel();
         model.addAttribute("hadreads", novelSetHave);
-
-        String color = (String) session.getAttribute("THEME-SESSION");
-        System.out.println("здеся");
-        if(color == null){
-            model.addAttribute("theme", lightThemePath);
-        }
-        else {
-            if (color.equals("light")) {
-                model.addAttribute("theme", lightThemePath);
-            } else {
-                model.addAttribute("theme", darkThemePath);
-            }
-        }
+        themeChange(model);
 
         return "profile";
     }
