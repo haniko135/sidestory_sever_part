@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   db:
-    container_name: sidestory_db
+    container_name: sidestory_db1
     image: mysql:latest
     ports:
       - "5555:3306"
@@ -12,10 +12,10 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: QWERTY
     volumes:
-      - "./mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "/mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"
 
   redis:
-    container_name: redis_nosql
+    container_name: redis_nosql_db
     image: redis:latest
     ports:
       - "6379:6379"

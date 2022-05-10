@@ -28,11 +28,6 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder(10);
-    }
-
-    @Bean
     public AccessDeniedHandler accessDeniedHandler(){
         return new MyAccessDeniedHandler();
     }

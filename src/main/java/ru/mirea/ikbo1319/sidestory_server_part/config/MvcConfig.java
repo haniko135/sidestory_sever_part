@@ -12,7 +12,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${upload.path}")
     private String imgsPath;
 
-    @Value("C:/Users/Nastya/Desktop/practica_git/Sidestory_server_part — копия/src/main/resources/templates/game_pages/")
+    @Value("${chapters.path}")
     private String gamePagesPath;
 
     @Override
