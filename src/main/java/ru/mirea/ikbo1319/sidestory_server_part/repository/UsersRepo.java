@@ -11,4 +11,6 @@ public interface UsersRepo extends CrudRepository<Users, Long> {
     Users findByUsername(String username);
     Users findAllByActiveIsTrue();
     Users findAllById(Long userId);
+
+    Users findByEmailIgnoreCase(String email);
 }

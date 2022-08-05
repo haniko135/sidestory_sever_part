@@ -41,7 +41,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                         .antMatchers("/profile?*", "game_pages/**/**/**", "/nowReadNovelToProfile?**",
-                        "/hadReadNovelToProfile?**", "/deleteHadReadNovel?**", "/deleteNowReadNovel?**")
+                        "/hadReadNovelToProfile?**", "/deleteHadReadNovel?**", "/deleteNowReadNovel?**", "/confirm-email?**")
                         .hasRole("USER")
                 .and()
                     .authorizeRequests()

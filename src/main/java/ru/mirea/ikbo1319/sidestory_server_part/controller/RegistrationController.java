@@ -2,6 +2,7 @@ package ru.mirea.ikbo1319.sidestory_server_part.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mirea.ikbo1319.sidestory_server_part.entity.ConfirmationToken;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Novel;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Roles;
 import ru.mirea.ikbo1319.sidestory_server_part.entity.Users;
+import ru.mirea.ikbo1319.sidestory_server_part.repository.ConfirmationTokenRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.NovelRepo;
 import ru.mirea.ikbo1319.sidestory_server_part.repository.UsersRepo;
+import ru.mirea.ikbo1319.sidestory_server_part.services.EmailSenderService;
 
 import javax.servlet.http.*;
 import javax.validation.Valid;
@@ -38,6 +42,12 @@ public class RegistrationController{
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    ConfirmationTokenRepo confirmationTokenRepo;
+
+    @Autowired
+    EmailSenderService emailSenderService;
 
     @Value("${upload.path}")
     String imgsPath;
@@ -115,10 +125,36 @@ public class RegistrationController{
         Users users = usersRepo.findByUsername(username);
         if(sex != null){ users.setSex(sex); }
         if(age != null){ users.setAge(age); }
-        if(email != null) { users.setEmail(email);}
+        if(email != null) {
+            users.setEmail(email);
+
+            ConfirmationToken confirmationToken = new ConfirmationToken(users);
+            confirmationTokenRepo.save(confirmationToken);
+
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(users.getEmail());
+            mailMessage.setSubject("Подтвердите почту");
+            mailMessage.setFrom("aizotina@yandex.ru");
+            mailMessage.setText("Подтвердите почту перейдя по ссылке: "+"http://localhost:8080/confirm-email?token="
+                    +confirmationToken.getConfirmationToken()+"&username="+username);
+
+            emailSenderService.sendEmail(mailMessage);
+        }
         usersRepo.save(users);
 
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value="/confirm-email", method= {RequestMethod.GET, RequestMethod.POST})
+    public String confirmEmail(@RequestParam("token")String confirmationToken, @RequestParam("username") String username){
+        ConfirmationToken confirmationToken1 = confirmationTokenRepo.findByConfirmationToken(confirmationToken);
+        if(confirmationToken != null){
+            Users users = usersRepo.findByEmailIgnoreCase(confirmationToken1.getUser().getEmail());
+            users.setActive(true);
+            usersRepo.save(users);
+            return "redirect:/profile";
+        }
+        return "redirect:/errormail";
     }
 
     @RequestMapping("/nowReadNovelToProfile")
