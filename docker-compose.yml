@@ -1,21 +1,184 @@
 version: '3.5'
 
+volumes:
+  prometheus-data: {}
+  grafana-data: {}
+
 services:
   db:
     container_name: sidestory_db1
-    image: mysql:latest
+    image: postgres:latest
     ports:
-      - "5555:3306"
+      - "5555:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: QWERTY
-      MYSQL_DATABASE: sidestory_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: QWERTY
+      POSTGRES_ROOT_PASSWORD: QWERTY
+      POSTGRES_DB: sidestory_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: QWERTY
     volumes:
-      - "/mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./mysql/data.sql:/docker-entrypoint-initdb.d/1.sql"
+
+  db2:
+    container_name: sidestory_db_zabbix
+    image: postgres:latest
+    ports:
+      - "5556:5432"
+    environment:
+      POSTGRES_ROOT_PASSWORD: QWERTY
+      POSTGRES_DB: zabbix_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: QWERTY
 
   redis:
     container_name: redis_nosql_db
     image: redis:latest
     ports:
       - "6379:6379"
+
+  zabbix:
+    container_name: sidestory_zabbix
+    image: zabbix/zabbix-server-pgsql:ubuntu-6.2-latest
+    environment:
+      TZ: "Europe/Moscow"
+      DB_SERVER_HOST: db2
+      POSTGRES_DB: zabbix_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: QWERTY
+      ZBX_JAVAGATEWAY: zabbix-java
+    depends_on:
+      - db2
+
+  web:
+    container_name: sidestory_zabbix_web
+    image: zabbix/zabbix-web-apache-pgsql
+    environment:
+      DB_SERVER_HOST: db2
+      POSTGRES_DB: zabbix_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: QWERTY
+      ZBX_SERVER_HOST: zabbix
+      ZBX_HOSTNAME: Zabbix server
+      TZ: Europe/Moscow
+    ports:
+      - 80:8080
+      - 8443:8443
+    depends_on:
+      - db2
+      - zabbix
+
+  agent:
+    container_name: sidestory_zabbix_agent
+    image: zabbix/zabbix-agent2
+    environment:
+      TZ: Europe/Moscow
+      ZBX_HOSTNAME: Zabbix server
+      ZBX_SERVER_HOST: zabbix
+      DB_SERVER_HOST: db2
+      POSTGRES_DB: zabbix_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: QWERTY
+    links:
+      - "zabbix:zabbix"
+    depends_on:
+      - db2
+      - zabbix
+
+  zabbix-java:
+    container_name: sidestory_zabbix_java
+    image: zabbix/zabbix-java-gateway:alpine-6.0-latest
+    ports:
+      - 10052:10052
+
+  adminer_container:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DESIGN: galkaev
+    ports:
+      - 82:8080
+
+  graylog:
+    container_name: sidestory_graylog
+    image: graylog/graylog:4.2
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYlOG_HTTP_EXTERNAL_URI=http://127.0.0.0:9000/
+    links:
+      - mongo
+      - elasticsearch
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      - 9000:9000
+      - 1514:1514
+      # Syslog UDP
+      - 1514:1514/udp
+      # GELF TCP
+      - 12201:12201
+      # GELF UDP
+      - 12201:12201/udp
+
+  elasticsearch:
+    container_name: sidestory_elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - node.max_local_storage_nodes=4
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  mongo:
+    container_name: sidestory_mongo
+    image: mongo:4.2
+
+  prometheus:
+    container_name: sidestory_prometheus
+    image: prom/prometheus:v2.36.2
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+
+  grafana:
+    container_name: sidestory_grafana
+    image: grafana/grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_HOST: db:5432
+      GF_DATABASE_NAME: sidestory_db
+      GF_DATABASE_USER: admin
+      GF_DATABASE_PASSWORD: QWERTY
+      GF_DATABASE_SSL_MODE: disable
+      TZ: "Europe/Moscow"
+    depends_on:
+      - prometheus
+      - db
+
+
+  pg_exporter:
+    container_name: sidestory_pg_exporter
+    image: wrouesnel/postgres_exporter
+    ports:
+      - "9187:9187"
+    environment:
+      DATA_SOURCE_NAME: 'postgresql://admin:QWERTY@db:5432/sidestory_db?sslmode=disable'
+    depends_on:
+      - db
+      - prometheus

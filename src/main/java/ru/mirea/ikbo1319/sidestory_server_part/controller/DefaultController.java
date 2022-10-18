@@ -146,4 +146,9 @@ public class DefaultController {
 
         return "profile";
     }
+
+    @GetMapping("/logs")
+    public String logs(){
+        return "redirect:http://127.0.0.1:9000/search";
+    }
 }

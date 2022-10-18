@@ -139,6 +139,10 @@
                         <div class="d-flex justify-content-around text_info">
                             <p class="profile_username" th:text="${user.getUsername()}"></p>
                             <form th:action="@{'/gender?username='+${user.getUsername}}" class="d-flex profile_checkboks" method="post">
+                                <p class="profile_name d-flex flex-row">
+                                    <b class="d-inline">Автор: </b>
+                                    <input type="checkbox" class="align-self-center" name="isAuthor">
+                                </p>
                                 <div class="d-flex p-3 profile_sex">
                                     <p class="profile_name"><b>Пол:</b> <span th:if="${user.getSex()}" th:text="${user.getSex()}"></span></p>
                                     <div class="d-flex">

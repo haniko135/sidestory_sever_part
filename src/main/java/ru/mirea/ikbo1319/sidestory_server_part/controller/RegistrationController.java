@@ -91,7 +91,7 @@ public class RegistrationController{
             user.setRoles(Collections.singleton(Roles.USER));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             usersRepo.save(user);
-            System.out.println(user.toString());
+            System.out.println(user);
 
             return "redirect:/login";
         }
@@ -121,8 +121,9 @@ public class RegistrationController{
     }
 
     @PostMapping("/gender")
-    public String addGender(@RequestParam("username") String username, String sex, Integer age, String email){
+    public String addGender(@RequestParam("username") String username, Boolean isAuthor, String sex, Integer age, String email){
         Users users = usersRepo.findByUsername(username);
+        if(isAuthor != null) { users.setIsAuthor(true); }
         if(sex != null){ users.setSex(sex); }
         if(age != null){ users.setAge(age); }
         if(email != null) {
